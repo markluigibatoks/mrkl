@@ -107,22 +107,27 @@ function navAnimation(duration) {
       class="relative z-20 flex h-12 items-center justify-between bg-white px-6 shadow-lg lg:px-0"
     >
       <div class="text-4xl font-bold text-[#e91e63]">mrkl</div>
-      <div
-        @click="toggleMenu(), (open = !open)"
-        class="relative h-[30px] w-[30px] cursor-pointer"
-      >
-        <i
-          ref="line1"
-          class="absolute top-1/2 left-1/2 -mt-[2px] -ml-[11px] h-[2px] w-[22px] origin-center bg-[#e91e63]"
-        ></i>
-        <i
-          ref="line2"
-          class="absolute top-1/2 left-1/2 -mt-[2px] -ml-[11px] h-[2px] w-[22px] origin-center bg-[#e91e63]"
-        ></i>
-        <i
-          ref="line3"
-          class="absolute top-1/2 left-1/2 -mt-[2px] -ml-[11px] h-[2px] w-[22px] origin-center bg-[#e91e63]"
-        ></i>
+      <div class="flex gap-5">
+        <a href="#" class="rounded-full bg-[#e91e63] px-4 font-bold text-white">
+          Say Hello
+        </a>
+        <div
+          @click="toggleMenu(), (open = !open)"
+          class="relative h-[30px] w-[30px] cursor-pointer"
+        >
+          <i
+            ref="line1"
+            class="absolute top-1/2 left-1/2 -mt-[2px] -ml-[11px] h-[2px] w-[22px] origin-center bg-[#e91e63]"
+          ></i>
+          <i
+            ref="line2"
+            class="absolute top-1/2 left-1/2 -mt-[2px] -ml-[11px] h-[2px] w-[22px] origin-center bg-[#e91e63]"
+          ></i>
+          <i
+            ref="line3"
+            class="absolute top-1/2 left-1/2 -mt-[2px] -ml-[11px] h-[2px] w-[22px] origin-center bg-[#e91e63]"
+          ></i>
+        </div>
       </div>
     </bar>
     <nav ref="nav" class="relative z-10 block">
@@ -147,9 +152,11 @@ function navAnimation(duration) {
       </ul>
     </nav>
   </header>
-  <header class="hidden lg:block">
-    <nav>
-      <ul class="flex items-center justify-center">
+  <header
+    class="-transform-x-1/2 absolute left-0 hidden w-screen origin-center bg-white lg:block"
+  >
+    <nav class="m-auto flex max-w-[980px] items-center justify-between">
+      <ul class="flex items-center">
         <li
           class="
         "
@@ -171,6 +178,12 @@ function navAnimation(duration) {
           </a>
         </li>
       </ul>
+      <a
+        href="#"
+        class="rounded-full bg-[#e91e63] px-4 py-2 font-bold text-white"
+      >
+        Say Hello
+      </a>
     </nav>
   </header>
 </template>
