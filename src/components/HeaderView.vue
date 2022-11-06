@@ -153,7 +153,7 @@ function navAnimation(duration) {
     </nav>
   </header>
   <header
-    class="-transform-x-1/2 absolute left-0 z-20 hidden w-screen origin-center bg-white lg:block"
+    class="-transform-x-1/2 absolute left-0 z-20 hidden w-full origin-center bg-white lg:block"
   >
     <nav class="m-auto flex max-w-[980px] items-center justify-between">
       <ul class="flex items-center">
