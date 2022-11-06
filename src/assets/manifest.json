@@ -5,31 +5,31 @@
       "assets": [
         {
           "name": "displacement-map",
-          "srcs": "src/assets/mainview/displacement_map_repeat.jpg"
+          "srcs": "/mainview/displacement_map_repeat.jpg"
         },
         {
           "name": "hollowed-boxes",
-          "srcs": "src/assets/mainview/hollowed-boxes.png"
+          "srcs": "/mainview/hollowed-boxes.png"
         },
         {
           "name": "subtle-prism",
-          "srcs": "src/assets/mainview/subtle-prism.png"
+          "srcs": "/mainview/subtle-prism.png"
         },
         {
           "name": "wintery-sunburst",
-          "srcs": "src/assets/mainview/wintery-sunburst.png"
+          "srcs": "/mainview/wintery-sunburst.png"
         },
         {
           "name": "protruding-squares",
-          "srcs": "src/assets/mainview/protruding-squares.png"
+          "srcs": "/mainview/protruding-squares.png"
         },
         {
           "name": "starry-sky",
-          "srcs": "src/assets/mainview/starry-sky.png"
+          "srcs": "/mainview/starry-sky.png"
         },
         {
           "name": "pexels-jaymantri-5412",
-          "srcs": "src/assets/mainview/pexels-jaymantri-5412.jpg"
+          "srcs": "/mainview/pexels-jaymantri-5412.jpg"
         }
       ]
     }
