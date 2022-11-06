@@ -32,19 +32,28 @@ onMounted(async () => {
   >
     <div ref="canvasBg"></div>
     <main
-      class="w-full py-10 px-5 text-center lg:absolute lg:bottom-0 lg:left-1/2 lg:m-auto lg:flex lg:origin-center lg:-translate-x-1/2 lg:flex-col lg:justify-center lg:bg-white/30 lg:py-4 lg:text-white"
+      class="w-full bg-slate-100 py-10 px-5 lg:absolute lg:bottom-0 lg:left-1/2 lg:m-auto lg:flex lg:origin-center lg:-translate-x-1/2 lg:flex-col lg:justify-center lg:bg-slate-900/30 lg:py-4 lg:text-white"
     >
-      <div>
-        <h2
-          class="align-center mb-4 flex justify-center gap-4 text-3xl font-[600] leading-10"
-        >
-          안녕! <icon-waving-hand />
-        </h2>
+      <div
+        class="relative m-auto flex max-w-[980px] flex-col items-center justify-center gap-5 lg:flex-row lg:items-end lg:justify-between"
+      >
+        <div>
+          <h2
+            class="mb-4 flex items-center justify-center gap-4 text-3xl font-[600] leading-10 lg:items-start lg:justify-start"
+          >
+            안녕! <icon-waving-hand class="animate-wave" />
+          </h2>
 
-        <p class="mb-2 text-lg leading-7">
-          My name is Mark-Luigi Batoctoy, and my portfolio is a representation
-          of all that I have learned as a developer.
-        </p>
+          <p class="text-center text-lg leading-7 lg:text-left">
+            My name is Mark-Luigi, and my portfolio is a representation of all
+            that I have learned as a developer.
+          </p>
+        </div>
+        <a
+          href="#"
+          class="min-w-[120px] rounded-full bg-[#e91e63] px-4 py-2 text-center font-bold text-white hover:bg-[#c2185b]"
+          >Dive in</a
+        >
       </div>
     </main>
   </div>

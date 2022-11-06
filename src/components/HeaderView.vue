@@ -180,7 +180,7 @@ function navAnimation(duration) {
       </ul>
       <a
         href="#"
-        class="rounded-full bg-[#e91e63] px-4 py-2 font-bold text-white"
+        class="min-w-[120px] rounded-full bg-[#e91e63] px-4 py-2 text-center font-bold text-white hover:bg-[#c2185b]"
       >
         Say Hello
       </a>
