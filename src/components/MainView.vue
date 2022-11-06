@@ -28,7 +28,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="-z-10 aspect-video lg:absolute lg:top-0 lg:left-1/2 lg:max-h-full lg:w-screen lg:-translate-x-1/2 lg:overflow-hidden"
+    class="z-10 aspect-video lg:absolute lg:top-0 lg:left-1/2 lg:max-h-full lg:w-screen lg:-translate-x-1/2 lg:overflow-hidden"
   >
     <div ref="canvasBg"></div>
     <main
