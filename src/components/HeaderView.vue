@@ -108,7 +108,7 @@ function navAnimation(duration) {
     >
       <div class="text-4xl font-bold text-[#e91e63]">mrkl</div>
       <div class="flex gap-5 items-center">
-        <a href="#" class="rounded-full bg-[#e91e63] px-4 py-2 min-h-10 text-center font-bold text-white">
+        <a href="#" class="rounded-full bg-[#e91e63] px-4 py-2 min-h-10 text-center font-bold text-white hover:bg-[#c2185b]">
           Say Hello
         </a>
         <div
