@@ -104,11 +104,11 @@ function navAnimation(duration) {
 <template>
   <header class="fixed top-0 left-0 w-full lg:hidden">
     <div
-      class="relative z-20 flex h-12 items-center justify-between bg-white px-6 shadow-lg lg:px-0"
+      class="relative z-20 flex h-14 items-center justify-between bg-white px-6 shadow-lg lg:px-0"
     >
       <div class="text-4xl font-bold text-[#e91e63]">mrkl</div>
-      <div class="flex gap-5">
-        <a href="#" class="rounded-full bg-[#e91e63] px-4 font-bold text-white">
+      <div class="flex gap-5 items-center">
+        <a href="#" class="rounded-full bg-[#e91e63] px-4 py-2 min-h-10 text-center font-bold text-white">
           Say Hello
         </a>
         <div
@@ -180,7 +180,7 @@ function navAnimation(duration) {
       </ul>
       <a
         href="#"
-        class="min-w-[120px] rounded-full bg-[#e91e63] px-4 py-2 text-center font-bold text-white hover:bg-[#c2185b]"
+        class="min-w-[120px] rounded-full bg-[#e91e63] px-4 py-2 min-h-10 text-center font-bold text-white hover:bg-[#c2185b]"
       >
         Say Hello
       </a>

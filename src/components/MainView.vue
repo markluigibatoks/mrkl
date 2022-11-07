@@ -51,7 +51,7 @@ onMounted(async () => {
         </div>
         <a
           href="#"
-          class="min-w-[120px] rounded-full bg-[#e91e63] px-4 py-2 text-center font-bold text-white hover:bg-[#c2185b]"
+          class="min-w-[120px] rounded-full bg-[#e91e63] px-4 py-2 min-h-10 text-center font-bold text-white hover:bg-[#c2185b]"
           >Dive in</a
         >
       </div>
