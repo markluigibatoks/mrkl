@@ -103,7 +103,7 @@ function navAnimation(duration) {
 
 <template>
   <header class="fixed top-0 left-0 w-full lg:hidden">
-    <bar
+    <div
       class="relative z-20 flex h-12 items-center justify-between bg-white px-6 shadow-lg lg:px-0"
     >
       <div class="text-4xl font-bold text-[#e91e63]">mrkl</div>
@@ -129,7 +129,7 @@ function navAnimation(duration) {
           ></i>
         </div>
       </div>
-    </bar>
+    </div>
     <nav ref="nav" class="relative z-10 block">
       <ul>
         <li>

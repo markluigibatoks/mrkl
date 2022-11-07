@@ -1,4 +1,4 @@
-import { Assets } from "pixi.js";
+import { Assets, utils } from "pixi.js";
 
 interface Manifest {
   bundles: {
@@ -16,6 +16,8 @@ export class AssetManager {
     const bundles = manifest.bundles.map((x) => x.name);
 
     Assets.backgroundLoadBundle(bundles);
+
+    utils.clearTextureCache();
 
     AssetManager.bundle = await Assets.loadBundle("mainview", () => {});
   }
