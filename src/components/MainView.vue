@@ -1,7 +1,7 @@
 <script setup>
 import { SceneManager } from "@/composables/useSceneManager";
 import { AssetManager } from "@/composables/useAssetManager";
-import manifestJson from "@/assets/manifest";
+import manifestJson from "@/assets/main-view-manifest";
 import { MainView } from "@/components/MainViewScene";
 import { onMounted, ref } from "vue";
 import IconWavingHand from "@/components/icons/IconWavingHand.vue";
