@@ -19,6 +19,6 @@ export class AssetManager {
 
     utils.clearTextureCache();
 
-    AssetManager.bundle = await Assets.loadBundle("mainview", () => {});
+    AssetManager.bundle = await Assets.loadBundle(bundles, () => {});
   }
 }

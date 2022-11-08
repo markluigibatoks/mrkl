@@ -44,9 +44,9 @@ export class MainView extends Container {
       0
     );
 
-    const background = new Sprite(AssetManager.bundle["pexels-jaymantri-5412"]);
+    const background = new Sprite(AssetManager.bundle.mainview["pexels-jaymantri-5412"]);
     this.#displacementSprite = new Sprite(
-      AssetManager.bundle["displacement-map"]
+      AssetManager.bundle.mainview["displacement-map"]
     );
 
     this.#displacementSprite.texture.baseTexture.wrapMode = WRAP_MODES.REPEAT;
