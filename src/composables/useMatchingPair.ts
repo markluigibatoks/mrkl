@@ -1,4 +1,4 @@
-import { Container, Sprite } from "pixi.js";
+import { Container, Sprite, utils } from "pixi.js";
 import gsap from "@/composables/useGSAP";
 import { AssetManager } from "@/composables/useAssetManager";
 
@@ -38,20 +38,57 @@ export class Card extends Sprite implements ICard {
 export class MatchingPair extends Container {
   card: Card;
   pairs: Card[];
+  openedCards: Card[]
+  cardEvent: utils.EventEmitter
+
   constructor(size: number) {
     super();
 
     this.pairs = [];
 
     for (let i = 0; i < size; i++) {
-      this.pairs.push(new Card("value", "frontImage", "backImage"));
+      const card = new Card("value", "frontImage", "backImage")
+
+      card.on("pointerdown", () => {
+        this.insertCard(card)
+        this.cardEvent.emit('insert')
+      })
+
+      this.pairs.push(card);
     }
+
+    this.cardEvent.on('insert', () => {
+
+      this.isPair() ? this.disableCard() : this.clearOpenedCards()
+    })
 
     // TODO: Add Cards in a table-like manner
     this.sortableChildren = true;
   }
 
+  clearOpenedCards (){
+    this.openedCards = []
+  }
+
+  disableCard (){
+    this.openedCards.map(card => {
+      card.interactive = false
+      card.cursor = null
+    })
+    this.clearOpenedCards()
+  }
+
+  isPair ():boolean {
+    return this.openedCards[0].value === this.openedCards[1].value
+  }
+
+  insertCard (card: Card) {
+    if(!(this.openedCards.length >= 2)) {
+      this.openedCards.push(card)
+    }
+  }
+
   shuffleCards() {
-    throw new Error("Method not implemented.");
+    this.pairs.sort(() => Math.random()-0.5)
   }
 }
