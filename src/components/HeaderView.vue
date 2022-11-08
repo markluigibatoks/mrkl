@@ -141,13 +141,12 @@ function navAnimation(duration) {
           </a>
         </li>
         <li>
-          <a
-            href="#"
+          <router-link 
             class="flex items-center gap-2 bg-slate-200 px-6 font-[600] leading-[48px] text-sky-600 hover:text-sky-500"
-          >
+            to="/playground">
             <icon-code class="text-xl text-sky-600" />
             Playground
-          </a>
+          </router-link>
         </li>
       </ul>
     </nav>
