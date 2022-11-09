@@ -9,8 +9,6 @@ import IconWavingHand from "@/components/icons/IconWavingHand.vue";
 const canvasBg = ref(null);
 
 onMounted(async () => {
-  console.log(canvasBg);
-
   SceneManager.initialize({
     canvasHolder: canvasBg.value,
     width: 960,
