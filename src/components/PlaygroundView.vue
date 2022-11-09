@@ -4,4 +4,5 @@ console.log('hi')
 
 <template>
   <h1>Welcome to Playground</h1>
+  <router-view/>
 </template>

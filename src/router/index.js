@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "@/components/HomeView.vue";
 import Playground from "@/components/PlaygroundView.vue";
+import MatchingPair from "@/components/MatchingPairView.vue";
 import NotFound from "@/components/NotFoundView.vue";
 
 const routes = [
@@ -13,6 +14,13 @@ const routes = [
     path: "/playground",
     name: "Playground",
     component: Playground,
+    children: [
+      {
+        path: "matchingpair",
+        name: "MatchingPair",
+        component: MatchingPair,
+      },
+    ]
   },
   {
     path: "/:catchAll(.*)",
