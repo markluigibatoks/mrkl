@@ -106,9 +106,17 @@ function navAnimation(duration) {
     <div
       class="relative z-20 flex h-14 items-center justify-between bg-white px-6 shadow-lg lg:px-0"
     >
-      <div class="text-4xl font-bold text-[#e91e63]">mrkl</div>
-      <div class="flex gap-5 items-center">
-        <a href="#" class="rounded-full bg-[#e91e63] px-4 py-2 min-h-10 text-center font-bold text-white hover:bg-[#c2185b]">
+      <div
+        class="cursor-pointer text-4xl font-bold text-[#e91e63]"
+        @click="toggleMenu(), (open = !open)"
+      >
+        mrkl
+      </div>
+      <div class="flex items-center gap-5">
+        <a
+          href="#"
+          class="min-h-10 rounded-full bg-[#e91e63] px-4 py-2 text-center font-bold text-white hover:bg-[#c2185b]"
+        >
           Say Hello
         </a>
         <div
@@ -133,19 +141,34 @@ function navAnimation(duration) {
     <nav ref="nav" class="relative z-10 block">
       <ul>
         <li>
-          <a
-            href="#"
-            class="flex items-center gap-2 bg-slate-300 px-6 font-[600] leading-[48px] text-neutral-800 hover:text-sky-500"
+          <router-link
+            to="/"
+            exact
+            v-slot="{ href, navigate, isActive, isExactActive }"
           >
-            Home
-          </a>
+            <a
+              :href="href"
+              :class="{ 'bg-slate-300 text-sky-600': isExactActive }"
+              class="flex items-center gap-2 px-6 font-[600] leading-[48px] text-neutral-800 hover:text-sky-500"
+            >
+              Home
+            </a>
+          </router-link>
         </li>
         <li>
-          <router-link 
-            class="flex items-center gap-2 bg-slate-200 px-6 font-[600] leading-[48px] text-sky-600 hover:text-sky-500"
-            to="/playground">
-            <icon-code class="text-xl text-sky-600" />
-            Playground
+          <router-link
+            to="/playground"
+            exact
+            v-slot="{ href, navigate, isActive, isExactActive }"
+          >
+            <a
+              :href="href"
+              :class="{ 'bg-slate-300 text-sky-600': isExactActive }"
+              class="flex items-center gap-2 bg-slate-200 px-6 font-[600] leading-[48px] text-neutral-800 hover:text-sky-500"
+            >
+              <icon-code class="text-xl" />
+              Playground
+            </a>
           </router-link>
         </li>
       </ul>
@@ -160,26 +183,43 @@ function navAnimation(duration) {
           class="
         "
         >
-          <a href="#" class="block px-6 py-[25px] font-[600] hover:text-sky-500"
-            >Home</a
+          <router-link
+            to="/"
+            exact
+            v-slot="{ href, navigate, isActive, isExactActive }"
           >
+            <a
+              :href="href"
+              :class="{ 'text-sky-500 underline': isExactActive }"
+              class="block px-6 py-[25px] font-[600] hover:text-sky-500"
+            >
+              Home
+            </a>
+          </router-link>
         </li>
         <li
           class="
         "
         >
-          <a
-            href="#"
-            class="flex items-center gap-2 px-6 py-[25px] text-sky-600 hover:text-sky-500"
+          <router-link
+            to="/playground"
+            exact
+            v-slot="{ href, navigate, isActive, isExactActive }"
           >
-            <icon-code class="text-xl text-sky-600" />
-            Playground
-          </a>
+            <a
+              :href="href"
+              :class="{ 'text-sky-500 underline': isExactActive }"
+              class="flex items-center gap-2 px-6 py-[25px] text-sky-600 hover:text-sky-500"
+            >
+              <icon-code class="text-xl text-sky-600" />
+              Playground
+            </a>
+          </router-link>
         </li>
       </ul>
       <a
         href="#"
-        class="min-w-[120px] rounded-full bg-[#e91e63] px-4 py-2 min-h-10 text-center font-bold text-white hover:bg-[#c2185b]"
+        class="min-h-10 min-w-[120px] rounded-full bg-[#e91e63] px-4 py-2 text-center font-bold text-white hover:bg-[#c2185b]"
       >
         Say Hello
       </a>
