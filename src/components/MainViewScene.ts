@@ -1,8 +1,7 @@
-import { ShockwaveFilter, PixelateFilter, BevelFilter } from "pixi-filters";
+import { ShockwaveFilter, BevelFilter } from "pixi-filters";
 import { Container, Sprite, filters, WRAP_MODES, Text } from "pixi.js";
 import { AssetManager } from "../composables/useAssetManager";
 import { SceneManager } from "../composables/useSceneManager";
-import gsap from "../composables/useGSAP";
 
 export class MainView extends Container {
   #displacementSprite;
