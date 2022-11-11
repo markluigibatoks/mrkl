@@ -1,4 +1,4 @@
-import { Container, Sprite, Assets } from "pixi.js";
+import { Container, Sprite } from "pixi.js";
 import gsap from "@/composables/useGSAP";
 import { AssetManager } from "@/composables/useAssetManager";
 
@@ -6,32 +6,50 @@ export interface ICard {
   value: number;
   frontImage: string;
   backImage: string;
+  pairedImage: string;
   isFlip: boolean;
   timeline: gsap.timeline;
 
   flip(): gsap.timeline;
   fadeIn(): gsap.timeline;
+  paired(): gsap.timeline;
 }
 
 export class Card extends Sprite implements ICard {
   value: number;
   frontImage: string;
   backImage: string;
+  pairedImage: string;
   isFlip: boolean;
   timeline: gsap.timeline;
+  pairedSprite: Sprite;
 
-  constructor(value: number, frontImage: string, backImage: string) {
+  constructor(
+    value: number,
+    frontImage: string,
+    backImage: string,
+    pairedImage: string
+  ) {
     super(AssetManager.bundle.matchingpair[backImage]);
 
     this.value = value;
     this.frontImage = frontImage;
     this.backImage = backImage;
+    this.backImage = pairedImage;
     this.isFlip = false;
     this.timeline = gsap.timeline();
 
     this.cursor = "pointer";
     this.interactive = true;
     this.anchor.set(0.5);
+
+    this.pairedSprite = new Sprite(
+      AssetManager.bundle.matchingpair[pairedImage]
+    );
+    this.pairedSprite.scale.set(0.1);
+    this.pairedSprite.anchor.set(0.5);
+    this.pairedSprite.alpha = 0;
+    this.addChild(this.pairedSprite);
   }
 
   flip(): gsap.timeline {
@@ -68,6 +86,40 @@ export class Card extends Sprite implements ICard {
     return timeline;
   }
 
+  paired() {
+    console.log("paireds");
+    const timeline = gsap.timeline();
+
+    timeline.set(this.pairedSprite, {
+      pixi: {
+        scale: 0,
+        alpha: 1,
+      },
+    });
+
+    timeline.to(this.pairedSprite, {
+      pixi: {
+        scale: 1,
+      },
+    });
+
+    timeline.to(this.pairedSprite, {
+      pixi: {
+        scale: 1.3,
+        alpha: 0.2,
+      },
+    });
+
+    timeline.set(this.pairedSprite, {
+      pixi: {
+        scale: 0.1,
+        alpha: 0,
+      },
+    });
+
+    return timeline;
+  }
+
   fadeIn() {
     throw new Error("Method not implemented.");
   }
@@ -86,11 +138,11 @@ export class MatchingPair extends Container {
     this.pairs = [];
 
     for (let i = 1; i <= 10; i++) {
-      this.pairs.push(this.createCard(i, `${i}`, "back"));
-      this.pairs.push(this.createCard(i, `${i}`, "back"));
+      this.pairs.push(this.createCard(i, `${i}`, "back", "check"));
+      this.pairs.push(this.createCard(i, `${i}`, "back", "check"));
     }
 
-    this.shuffleCards();
+    // this.shuffleCards();
     this.positionItems(10);
 
     this.on("insert" as any, () => {
@@ -99,13 +151,14 @@ export class MatchingPair extends Container {
       }
 
       if (this.isPair()) {
+        this.openedCards.forEach((card) => card.paired());
         this.disableCard();
         this.isWin()
           ? AssetManager.bundle.sounds["good-result"].play()
           : AssetManager.bundle.sounds["yay"].play();
       } else {
         AssetManager.bundle.sounds["cartoon-hop"].play();
-        this.openedCards.map((card) => card.flip());
+        this.openedCards.forEach((card) => card.flip());
         this.clearOpenedCards();
       }
     });
@@ -156,11 +209,11 @@ export class MatchingPair extends Container {
     });
   }
 
-  createCard(key, frontImage, backImage) {
+  createCard(key, frontImage, backImage, pairedImage) {
     const container = new Container();
     container.sortableChildren = true;
 
-    const card = new Card(key, frontImage, backImage);
+    const card = new Card(key, frontImage, backImage, pairedImage);
     this.cards.push(card);
     container.addChild(card);
     card.position.set(container.width * 0.5, container.height * 0.5);

@@ -8,6 +8,10 @@
           "srcs": "/matchingpair/back.png"
         },
         {
+          "name": "check",
+          "srcs": "/matchingpair/check.png"
+        },
+        {
           "name": "1",
           "srcs": "/matchingpair/1.png"
         },
