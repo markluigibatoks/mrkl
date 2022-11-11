@@ -138,18 +138,23 @@ function navAnimation(duration) {
         </div>
       </div>
     </div>
-    <nav ref="nav" class="relative z-10 block">
+    <nav ref="nav" class="absolute z-10 block w-full">
       <ul>
         <li>
           <router-link
             to="/"
             exact
+            custom
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <a
               :href="href"
-              :class="{ 'bg-slate-300 text-sky-600': isExactActive }"
-              class="flex items-center gap-2 px-6 font-[600] leading-[48px] text-neutral-800 hover:text-sky-500"
+              :class="[
+                isExactActive
+                  ? 'bg-slate-300 text-sky-600'
+                  : 'bg-slate-200 text-neutral-800',
+              ]"
+              class="flex items-center gap-2 px-6 font-[600] leading-[48px] hover:text-sky-500"
             >
               Home
             </a>
@@ -159,12 +164,17 @@ function navAnimation(duration) {
           <router-link
             to="/playground"
             exact
+            custom
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <a
               :href="href"
-              :class="{ 'bg-slate-300 text-sky-600': isExactActive }"
-              class="flex items-center gap-2 bg-slate-200 px-6 font-[600] leading-[48px] text-neutral-800 hover:text-sky-500"
+              :class="[
+                isExactActive
+                  ? 'bg-slate-300 text-sky-600'
+                  : 'bg-slate-200 text-neutral-800',
+              ]"
+              class="flex items-center gap-2 px-6 font-[600] leading-[48px] hover:text-sky-500"
             >
               <icon-code class="text-xl" />
               Playground
@@ -186,6 +196,7 @@ function navAnimation(duration) {
           <router-link
             to="/"
             exact
+            custom
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <a
@@ -204,14 +215,22 @@ function navAnimation(duration) {
           <router-link
             to="/playground"
             exact
+            custom
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <a
               :href="href"
-              :class="{ 'text-sky-500 underline': isExactActive }"
-              class="flex items-center gap-2 px-6 py-[25px] text-sky-600 hover:text-sky-500"
+              :class="[
+                isExactActive ? 'text-sky-500 underline' : 'text-sky-600',
+              ]"
+              class="flex items-center gap-2 px-6 py-[25px] hover:text-sky-500"
             >
-              <icon-code class="text-xl text-sky-600" />
+              <icon-code
+                :class="[
+                  isExactActive ? 'text-sky-500 underline' : 'text-sky-600',
+                ]"
+                class="text-xl"
+              />
               Playground
             </a>
           </router-link>
