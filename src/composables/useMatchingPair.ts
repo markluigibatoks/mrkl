@@ -1,4 +1,4 @@
-import { Container, Sprite } from "pixi.js";
+import { Container, Sprite, Texture } from "pixi.js";
 import gsap from "@/composables/useGSAP";
 import { AssetManager } from "@/composables/useAssetManager";
 
@@ -15,7 +15,7 @@ export interface ICard {
   paired(): gsap.timeline;
 }
 
-export class Card extends Sprite implements ICard {
+export class Card extends Container implements ICard {
   value: number;
   frontImage: string;
   backImage: string;
@@ -23,6 +23,7 @@ export class Card extends Sprite implements ICard {
   isFlip: boolean;
   timeline: gsap.timeline;
   pairedSprite: Sprite;
+  cardSprite: Sprite;
 
   constructor(
     value: number,
@@ -30,26 +31,33 @@ export class Card extends Sprite implements ICard {
     backImage: string,
     pairedImage: string
   ) {
-    super(AssetManager.bundle.matchingpair[backImage]);
+    super();
 
     this.value = value;
     this.frontImage = frontImage;
     this.backImage = backImage;
-    this.backImage = pairedImage;
+    this.pairedImage = pairedImage;
     this.isFlip = false;
     this.timeline = gsap.timeline();
 
+    this.cardSprite = new Sprite(AssetManager.bundle.matchingpair[backImage]);
+    this.cardSprite.anchor.set(0.5);
+    this.cardSprite.position.set(this.width / 2, this.height / 2);
+
     this.cursor = "pointer";
     this.interactive = true;
-    this.anchor.set(0.5);
 
     this.pairedSprite = new Sprite(
       AssetManager.bundle.matchingpair[pairedImage]
     );
-    this.pairedSprite.scale.set(0.1);
     this.pairedSprite.anchor.set(0.5);
+    this.pairedSprite.position.set(this.width / 2, this.height / 2);
     this.pairedSprite.alpha = 0;
+
+    this.addChild(this.cardSprite);
     this.addChild(this.pairedSprite);
+
+    this.sortableChildren = true;
   }
 
   flip(): gsap.timeline {
@@ -57,7 +65,7 @@ export class Card extends Sprite implements ICard {
 
     const timeline = gsap.timeline();
 
-    timeline.to(this, {
+    timeline.to(this.cardSprite, {
       pixi: {
         width: 0,
       },
@@ -65,15 +73,15 @@ export class Card extends Sprite implements ICard {
       duration: 0.5,
     });
 
-    timeline.set(this, {
+    timeline.set(this.cardSprite, {
       pixi: {
         texture: AssetManager.bundle.matchingpair[texture],
       },
     });
 
-    timeline.to(this, {
+    timeline.to(this.cardSprite, {
       pixi: {
-        width: this.texture.width,
+        width: this.cardSprite.texture.width,
       },
       ease: "power4",
       duration: 0.5,
@@ -142,7 +150,7 @@ export class MatchingPair extends Container {
       this.pairs.push(this.createCard(i, `${i}`, "back", "check"));
     }
 
-    // this.shuffleCards();
+    this.shuffleCards();
     this.positionItems(10);
 
     this.on("insert" as any, () => {
