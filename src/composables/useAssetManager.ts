@@ -1,5 +1,5 @@
 import { Assets, utils } from "pixi.js";
-
+import { sound } from "@pixi/sound";
 interface Manifest {
   bundles: {
     name: string;
@@ -12,6 +12,10 @@ export class AssetManager {
 
   static async initialize(manifest: Manifest) {
     await Assets.init({ manifest });
+
+    // DANGER!! DO NOT REMOVE
+    console.log(sound);
+    // DANGER!! DO NOT REMOVE
 
     const bundles = manifest.bundles.map((x) => x.name);
 

@@ -48,6 +48,59 @@
           "srcs": "/matchingpair/10.png"
         }
       ]
+    },
+    {
+      "name": "sounds",
+      "assets": [
+        {
+          "name": "chime",
+          "srcs": "/sounds/chime.mp3"
+        },
+        {
+          "name": "loop3",
+          "srcs": "/sounds/loop3.mp3"
+        },
+        {
+          "name": "boing",
+          "srcs": "/sounds/boing.mp3"
+        },
+        {
+          "name": "applause",
+          "srcs": "/sounds/applause.mp3"
+        },
+        {
+          "name": "select-sound",
+          "srcs": "/sounds/select-sound.mp3"
+        },
+        {
+          "name": "cork",
+          "srcs": "/sounds/cork.mp3"
+        },
+        {
+          "name": "ui-click",
+          "srcs": "/sounds/ui-click.mp3"
+        },
+        {
+          "name": "yay",
+          "srcs": "/sounds/yay.mp3"
+        },
+        {
+          "name": "yipee",
+          "srcs": "/sounds/yipee.mp3"
+        },
+        {
+          "name": "short-success",
+          "srcs": "/sounds/short-success.mp3"
+        },
+        {
+          "name": "cartoon-hop",
+          "srcs": "/sounds/cartoon-hop.mp3"
+        },
+        {
+          "name": "good-result",
+          "srcs": "/sounds/good-result.mp3"
+        }
+      ]
     }
   ]
 }

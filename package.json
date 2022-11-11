@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@pixi/sound": "^5.0.0",
     "gsap": "^3.11.3",
     "pinia": "^2.0.23",
     "pixi-filters": "^5.0.0",
