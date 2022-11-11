@@ -1,4 +1,4 @@
-import { Container, Sprite } from "pixi.js";
+import { Container, Sprite, Assets } from "pixi.js";
 import gsap from "@/composables/useGSAP";
 import { AssetManager } from "@/composables/useAssetManager";
 
@@ -6,9 +6,11 @@ export interface ICard {
   value: number;
   frontImage: string;
   backImage: string;
+  isFlip: boolean;
+  timeline: gsap.timeline;
 
-  flip(): typeof gsap.timeline;
-  fadeIn(): typeof gsap.timeline;
+  flip(): gsap.timeline;
+  fadeIn(): gsap.timeline;
 }
 
 export class Card extends Sprite implements ICard {
@@ -16,6 +18,7 @@ export class Card extends Sprite implements ICard {
   frontImage: string;
   backImage: string;
   isFlip: boolean;
+  timeline: gsap.timeline;
 
   constructor(value: number, frontImage: string, backImage: string) {
     super(AssetManager.bundle.matchingpair[backImage]);
@@ -24,15 +27,15 @@ export class Card extends Sprite implements ICard {
     this.frontImage = frontImage;
     this.backImage = backImage;
     this.isFlip = false;
+    this.timeline = gsap.timeline();
 
     this.cursor = "pointer";
     this.interactive = true;
     this.anchor.set(0.5);
   }
 
-  flip() {
+  flip(): gsap.timeline {
     const texture = this.isFlip ? this.backImage : this.frontImage;
-    this.isFlip = !this.isFlip;
 
     const timeline = gsap.timeline();
 
@@ -57,6 +60,12 @@ export class Card extends Sprite implements ICard {
       ease: "power4",
       duration: 0.5,
     });
+
+    timeline.set(this, {
+      isFlip: !this.isFlip,
+    });
+
+    return timeline;
   }
 
   fadeIn() {
@@ -65,13 +74,14 @@ export class Card extends Sprite implements ICard {
 }
 
 export class MatchingPair extends Container {
-  card: Card;
   pairs: Container[];
   openedCards: Card[];
+  cards: Card[];
 
   constructor(size: number) {
     super();
 
+    this.cards = [];
     this.openedCards = [];
     this.pairs = [];
 
@@ -80,6 +90,7 @@ export class MatchingPair extends Container {
       this.pairs.push(this.createCard(i, `${i}`, "back"));
     }
 
+    this.shuffleCards();
     this.positionItems(10);
 
     this.on("insert" as any, () => {
@@ -89,7 +100,11 @@ export class MatchingPair extends Container {
 
       if (this.isPair()) {
         this.disableCard();
+        this.isWin()
+          ? AssetManager.bundle.sounds["good-result"].play()
+          : AssetManager.bundle.sounds["yay"].play();
       } else {
+        AssetManager.bundle.sounds["cartoon-hop"].play();
         this.openedCards.map((card) => card.flip());
         this.clearOpenedCards();
       }
@@ -97,6 +112,10 @@ export class MatchingPair extends Container {
 
     this.addChild(...this.pairs);
     this.sortableChildren = true;
+  }
+
+  isWin(): boolean {
+    return this.cards.every((card) => card.isFlip);
   }
 
   clearOpenedCards() {
@@ -142,13 +161,21 @@ export class MatchingPair extends Container {
     container.sortableChildren = true;
 
     const card = new Card(key, frontImage, backImage);
+    this.cards.push(card);
     container.addChild(card);
     card.position.set(container.width * 0.5, container.height * 0.5);
 
     container.on("pointerdown", () => {
-      this.insertCard(card);
-      card.flip();
-      this.emit("insert" as any);
+      if (card.isFlip) return;
+
+      AssetManager.bundle.sounds["select-sound"].play();
+      const timeline = gsap.timeline({
+        onComplete: () => {
+          this.insertCard(card);
+          this.emit("insert" as any);
+        },
+      });
+      timeline.add(card.flip());
     });
 
     return container;
