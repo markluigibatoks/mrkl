@@ -1,11 +1,12 @@
 <script setup>
-import { onMounted, ref } from 'vue'
-import { AssetManager } from '@/composables/useAssetManager'
-import { SceneManager } from '@/composables/useSceneManager'
-import { MatchingPair } from '@/composables/useMatchingPair'
-import manifestJson from '@/assets/matching-pair-manifest.json'
+import { onMounted, ref } from "vue";
+import { AssetManager } from "@/composables/useAssetManager";
+import { SceneManager } from "@/composables/useSceneManager";
+import { MatchingPair } from "@/composables/useMatchingPair";
+import { LoadingView } from "@/components/LoadingViewScene";
+import manifestJson from "@/assets/matching-pair-manifest.json";
 
-const canvas = ref(null)
+const canvas = ref(null);
 
 onMounted(async () => {
   SceneManager.initialize({
@@ -19,11 +20,10 @@ onMounted(async () => {
 
   await AssetManager.initialize(manifestJson);
 
-  SceneManager.app.stage.addChild(new MatchingPair());
-})
+  SceneManager.app.stage.addChild(new LoadingView());
+});
 </script>
 
 <template>
-  <div ref="canvas">
-  </div>
+  <div ref="canvas"></div>
 </template>

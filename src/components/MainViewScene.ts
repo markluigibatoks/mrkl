@@ -43,7 +43,9 @@ export class MainView extends Container {
       0
     );
 
-    const background = new Sprite(AssetManager.bundle.mainview["pexels-jaymantri-5412"]);
+    const background = new Sprite(
+      AssetManager.bundle.mainview["pexels-jaymantri-5412"]
+    );
     this.#displacementSprite = new Sprite(
       AssetManager.bundle.mainview["displacement-map"]
     );
@@ -57,7 +59,9 @@ export class MainView extends Container {
     displacementFilter.scale.x = 30;
     displacementFilter.scale.y = 60;
 
-    this.filters = [displacementFilter, this.#mouseRipple, ...this.#ripples];
+    background.filters = [displacementFilter];
+
+    this.filters = [this.#mouseRipple, ...this.#ripples];
 
     const mrklText = new Text("mrkl", {
       fontSize: 120,

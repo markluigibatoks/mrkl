@@ -5,7 +5,7 @@
       "assets": [
         {
           "name": "displacement-map",
-          "srcs": "/mainview/displacement_map_repeat.jpg"
+          "srcs": "/images/displacement_map_repeat.jpg"
         },
         {
           "name": "hollowed-boxes",
