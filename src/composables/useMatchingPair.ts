@@ -93,7 +93,6 @@ export class Card extends Container implements ICard {
   }
 
   paired() {
-    console.log("paireds");
     const timeline = gsap.timeline();
 
     timeline.set(this.pairedSprite, {

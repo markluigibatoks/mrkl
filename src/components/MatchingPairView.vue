@@ -18,7 +18,6 @@ onMounted(async () => {
     minFPS: 30,
   });
 
-  console.log(generateManifest(["matchingpair", "sounds", "fonts"]));
   await AssetManager.initialize(
     generateManifest(["matchingpair", "sounds", "fonts"])
   );
