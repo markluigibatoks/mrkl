@@ -105,6 +105,19 @@
           "srcs": "/sounds/good-result.mp3"
         }
       ]
+    },
+    {
+      "name": "fonts",
+      "assets": [
+        {
+          "name": "Roboto Italic",
+          "srcs": "/fonts/Roboto-Italic.ttf"
+        },
+        {
+          "name": "Roboto Regular",
+          "srcs": "/fonts/Roboto-Regular.ttf"
+        }
+      ]
     }
   ]
 }

@@ -1,4 +1,4 @@
-import { Assets, utils } from "pixi.js";
+import { Assets, BitmapFont, utils } from "pixi.js";
 import { sound } from "@pixi/sound";
 interface Manifest {
   bundles: {
@@ -24,5 +24,21 @@ export class AssetManager {
     utils.clearTextureCache();
 
     AssetManager.bundle = await Assets.loadBundle(bundles, () => {});
+
+    AssetManager.preloadBitmapFonts();
+  }
+
+  static preloadBitmapFonts() {
+    BitmapFont.from(
+      "defaultFont",
+      {
+        fontSize: 24,
+        fontFamily: "Roboto Regular",
+        fill: utils.string2hex("#ffffff"),
+      },
+      {
+        chars: BitmapFont.ASCII,
+      }
+    );
   }
 }
