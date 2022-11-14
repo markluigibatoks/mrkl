@@ -52,7 +52,7 @@ function generateAssets(directory: string) {
 
     return {
       name: fileName,
-      srcs: value,
+      srcs: assets[value].default,
     };
   });
 }
