@@ -5,10 +5,6 @@ export default (directories: string[]) => {
     assets.push(...generateAssets(directory));
   });
 
-  for (let i = 0; i < directories.length; i++) {
-    assets.push(...generateAssets(directories[i]));
-  }
-
   return {
     bundles: [
       {

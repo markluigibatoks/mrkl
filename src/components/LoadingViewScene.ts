@@ -4,7 +4,7 @@ import {
   Sprite,
   Texture,
   BitmapText,
-  Text,
+  BitmapFont,
   utils,
 } from "pixi.js";
 import { SceneManager } from "@/composables/useSceneManager.ts";
@@ -22,6 +22,17 @@ export class LoadingView extends Container {
   constructor() {
     super();
 
+    BitmapFont.from(
+      "pixiFont",
+      {
+        fontSize: 24,
+        fill: utils.string2hex("#ffffff"),
+      },
+      {
+        chars: BitmapFont.ASCII,
+      }
+    );
+
     this.background = new Sprite(Texture.WHITE);
     this.background.tint = 0x5a0820;
     this.background.width = SceneManager.width;
@@ -29,12 +40,12 @@ export class LoadingView extends Container {
 
     const loadingText = new BitmapText("Loading...", {
       tint: utils.string2hex("#ffffff"),
-      fontName: "defaultFont",
+      fontName: "pixiFont",
     });
 
-    this.progressText = new BitmapText("0%", {
+    this.progressText = new BitmapText("10.01%", {
       tint: 0xffffff,
-      fontName: "defaultFont",
+      fontName: "pixiFont",
     });
 
     this.progressBar = new Container();
@@ -57,21 +68,35 @@ export class LoadingView extends Container {
     this.progressMask.endFill();
 
     progressFill.mask = this.progressMask;
-
     this.progressBar.addChild(progressBg, progressFill, this.progressMask);
 
     this.progressBar.sortableChildren = true;
 
-    this.addChild(loadingText);
-    this.addChild(this.progressText);
+    this.progressBar.position.set(
+      SceneManager.width * 0.5 - this.progressBar.width / 2,
+      SceneManager.height * 0.5 + this.progressBar.height / 2
+    );
+
+    this.progressText.position.set(loadingText.width + 8, 0);
+
+    const textContainer = new Container();
+    textContainer.sortableChildren = true;
+    textContainer.addChild(loadingText, this.progressText);
+
+    textContainer.position.set(
+      SceneManager.width * 0.5 - textContainer.width / 2,
+      SceneManager.height * 0.5 - textContainer.height / 2
+    );
+
     this.addChild(this.background);
+    this.addChild(textContainer);
     this.addChild(this.progressBar);
 
     this.sortableChildren = true;
   }
 
   updateProgress(progress: number) {
-    this.progressText.text = `${Number(progress.toFixed(2)) * 100}%`;
+    this.progressText.text = `${Number(progress.toFixed(1)) * 100}%`;
     this.progressMask.scale.x = progress;
   }
 }

@@ -8,6 +8,9 @@ import generateManifest from "@/composables/useGenerateManifest";
 
 const canvas = ref(null);
 
+let loadingView = null;
+let matchingPair = null;
+
 onMounted(async () => {
   SceneManager.initialize({
     canvasHolder: canvas.value,
@@ -16,13 +19,23 @@ onMounted(async () => {
     backgroundColor: 0x000000,
     maxFPS: 120,
     minFPS: 30,
+    size: "contain",
   });
 
+  console.log(generateManifest(["matchingpair", "sounds", "fonts"]));
   await AssetManager.initialize(
     generateManifest(["matchingpair", "sounds", "fonts"])
   );
 
-  SceneManager.app.stage.addChild(new MatchingPair());
+  loadingView = new LoadingView();
+
+  SceneManager.changeScene(loadingView);
+
+  await AssetManager.preload(loadingView.updateProgress);
+
+  matchingPair = new MatchingPair();
+
+  SceneManager.changeScene(matchingPair);
 });
 </script>
 

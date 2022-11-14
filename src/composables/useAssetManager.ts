@@ -9,23 +9,31 @@ interface Manifest {
 
 export class AssetManager {
   static bundle: any;
+  static manifest: Manifest;
 
   static async initialize(manifest: Manifest) {
+    AssetManager.manifest = manifest;
+
     await Assets.init({ manifest });
 
     // DANGER!! DO NOT REMOVE
     console.log(sound);
     // DANGER!! DO NOT REMOVE
 
-    const bundle = manifest.bundles[0].name;
+    const bundles = manifest.bundles.map((x) => x.name);
 
-    Assets.backgroundLoadBundle(bundle);
-
-    utils.clearTextureCache();
-
-    AssetManager.bundle = await Assets.loadBundle(bundle, () => {});
+    Assets.backgroundLoadBundle(bundles);
 
     AssetManager.preloadBitmapFonts();
+  }
+
+  static async preload(progress: any) {
+    utils.clearTextureCache();
+
+    AssetManager.bundle = await Assets.loadBundle(
+      AssetManager.manifest.bundles[0].name,
+      progress
+    );
   }
 
   static preloadBitmapFonts() {
