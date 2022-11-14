@@ -1,4 +1,4 @@
-import { Application } from "pixi.js";
+import { Application, Container } from "pixi.js";
 
 interface SceneOptions {
   canvasHolder?: any;
@@ -10,6 +10,7 @@ interface SceneOptions {
   antialias?: boolean;
   maxFPS?: number;
   minFPS?: number;
+  size?: "cover" | "contain";
 }
 
 export class SceneManager {
@@ -17,6 +18,10 @@ export class SceneManager {
 
   static width = 0;
   static height = 0;
+
+  static size = "";
+
+  private static currentScene: Container;
 
   static initialize({
     canvasHolder = document.querySelector("#app"),
@@ -28,9 +33,12 @@ export class SceneManager {
     antialias = true,
     maxFPS = 60,
     minFPS = 60,
+    size = "cover",
   }: SceneOptions) {
     SceneManager.width = width;
     SceneManager.height = height;
+
+    SceneManager.size = size;
 
     SceneManager.app = new Application({
       width,
@@ -71,8 +79,12 @@ export class SceneManager {
     }
 
     if (screenWidth > 960 && screenHeight > 540) {
-      enlargedWidth = screenWidth;
-      enlargedHeight = (screenWidth * 9) / 16;
+      enlargedWidth =
+        SceneManager.size === "cover" ? screenWidth : SceneManager.width;
+      enlargedHeight =
+        SceneManager.size === "cover"
+          ? (screenWidth * 9) / 16
+          : SceneManager.height;
     }
 
     if (SceneManager.app.view.style) {
@@ -80,5 +92,15 @@ export class SceneManager {
       view.style.width = `${enlargedWidth}px`;
       view.style.height = `${enlargedHeight}px`;
     }
+  }
+
+  static changeScene(container: Container) {
+    if (SceneManager.currentScene) {
+      SceneManager.app.stage.removeChild(SceneManager.currentScene);
+      SceneManager.currentScene.destroy();
+    }
+
+    SceneManager.currentScene = container;
+    SceneManager.app.stage.addChild(SceneManager.currentScene);
   }
 }
