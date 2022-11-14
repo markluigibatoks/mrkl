@@ -14,8 +14,8 @@ onMounted(async () => {
     width: 960,
     height: 540,
     backgroundColor: 0x000000,
-    maxFPS: 120,
-    minFPS: 30,
+    maxFPS: 12,
+    minFPS: 12,
   });
 
   await AssetManager.initialize(generateManifest(["mainview", "fonts"]));
@@ -51,7 +51,7 @@ onMounted(async () => {
         </div>
         <a
           href="#"
-          class="min-h-10 min-w-[120px] rounded-full bg-[#e91e63] px-4 py-2 text-center font-bold text-white hover:bg-[#c2185b]"
+          class="min-h-10 min-w-[px] rounded-full bg-[#e91e63] px-4 py-2 text-center font-bold text-white hover:bg-[#c2185b]"
           >Dive in</a
         >
       </div>
