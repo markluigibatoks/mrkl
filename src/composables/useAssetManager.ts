@@ -19,11 +19,13 @@ export class AssetManager {
 
     const bundles = manifest.bundles.map((x) => x.name);
 
-    Assets.backgroundLoadBundle(bundles);
+    const bundle = manifest.bundles[0].name;
+
+    Assets.backgroundLoadBundle(bundle);
 
     utils.clearTextureCache();
 
-    AssetManager.bundle = await Assets.loadBundle(bundles, () => {});
+    AssetManager.bundle = await Assets.loadBundle(bundle, () => {});
 
     AssetManager.preloadBitmapFonts();
   }

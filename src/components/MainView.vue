@@ -1,7 +1,7 @@
 <script setup>
 import { SceneManager } from "@/composables/useSceneManager";
 import { AssetManager } from "@/composables/useAssetManager";
-import manifestJson from "@/assets/main-view-manifest";
+import generateManifest from "@/composables/useGenerateManifest";
 import { MainView } from "@/components/MainViewScene";
 import { onMounted, ref } from "vue";
 import IconWavingHand from "@/components/icons/IconWavingHand.vue";
@@ -18,7 +18,7 @@ onMounted(async () => {
     minFPS: 30,
   });
 
-  await AssetManager.initialize(manifestJson);
+  await AssetManager.initialize(generateManifest(["mainview", "fonts"]));
 
   SceneManager.app.stage.addChild(new MainView());
 });
@@ -49,7 +49,7 @@ onMounted(async () => {
         </div>
         <a
           href="#"
-          class="min-w-[120px] rounded-full bg-[#e91e63] px-4 py-2 min-h-10 text-center font-bold text-white hover:bg-[#c2185b]"
+          class="min-h-10 min-w-[120px] rounded-full bg-[#e91e63] px-4 py-2 text-center font-bold text-white hover:bg-[#c2185b]"
           >Dive in</a
         >
       </div>

@@ -40,16 +40,14 @@ export class Card extends Container implements ICard {
     this.isFlip = false;
     this.timeline = gsap.timeline();
 
-    this.cardSprite = new Sprite(AssetManager.bundle.matchingpair[backImage]);
+    this.cardSprite = new Sprite(AssetManager.bundle[backImage]);
     this.cardSprite.anchor.set(0.5);
     this.cardSprite.position.set(this.width / 2, this.height / 2);
 
     this.cursor = "pointer";
     this.interactive = true;
 
-    this.pairedSprite = new Sprite(
-      AssetManager.bundle.matchingpair[pairedImage]
-    );
+    this.pairedSprite = new Sprite(AssetManager.bundle[pairedImage]);
     this.pairedSprite.anchor.set(0.5);
     this.pairedSprite.position.set(this.width / 2, this.height / 2);
     this.pairedSprite.alpha = 0;
@@ -75,7 +73,7 @@ export class Card extends Container implements ICard {
 
     timeline.set(this.cardSprite, {
       pixi: {
-        texture: AssetManager.bundle.matchingpair[texture],
+        texture: AssetManager.bundle[texture],
       },
     });
 
@@ -162,10 +160,10 @@ export class MatchingPair extends Container {
         this.openedCards.forEach((card) => card.paired());
         this.disableCard();
         this.isWin()
-          ? AssetManager.bundle.sounds["good-result"].play()
-          : AssetManager.bundle.sounds["yay"].play();
+          ? AssetManager.bundle["good-result"].play()
+          : AssetManager.bundle["yay"].play();
       } else {
-        AssetManager.bundle.sounds["cartoon-hop"].play();
+        AssetManager.bundle["cartoon-hop"].play();
         this.openedCards.forEach((card) => card.flip());
         this.clearOpenedCards();
       }
@@ -229,7 +227,7 @@ export class MatchingPair extends Container {
     container.on("pointerdown", () => {
       if (card.isFlip) return;
 
-      AssetManager.bundle.sounds["select-sound"].play();
+      AssetManager.bundle["select-sound"].play();
       const timeline = gsap.timeline({
         onComplete: () => {
           this.insertCard(card);

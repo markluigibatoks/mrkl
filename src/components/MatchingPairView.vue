@@ -4,7 +4,7 @@ import { AssetManager } from "@/composables/useAssetManager";
 import { SceneManager } from "@/composables/useSceneManager";
 import { MatchingPair } from "@/composables/useMatchingPair";
 import { LoadingView } from "@/components/LoadingViewScene";
-import manifestJson from "@/assets/matching-pair-manifest.json";
+import generateManifest from "@/composables/useGenerateManifest";
 
 const canvas = ref(null);
 
@@ -18,7 +18,9 @@ onMounted(async () => {
     minFPS: 30,
   });
 
-  await AssetManager.initialize(manifestJson);
+  await AssetManager.initialize(
+    generateManifest(["matchingpair", "sounds", "fonts"])
+  );
 
   SceneManager.app.stage.addChild(new LoadingView());
 });
