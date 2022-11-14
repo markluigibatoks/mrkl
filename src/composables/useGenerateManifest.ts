@@ -42,7 +42,7 @@ function generateAssets(directory: string) {
       assets = [];
       break;
   }
-
+  console.log(assets);
   return Object.keys(assets).map((value) => {
     const [fileName]: any = value?.split("/")?.pop()?.split(".");
 
