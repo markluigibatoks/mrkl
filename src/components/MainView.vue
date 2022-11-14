@@ -20,7 +20,9 @@ onMounted(async () => {
 
   await AssetManager.initialize(generateManifest(["mainview", "fonts"]));
 
-  SceneManager.app.stage.addChild(new MainView());
+  await AssetManager.preload(() => {});
+
+  SceneManager.changeScene(new MainView());
 });
 </script>
 

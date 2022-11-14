@@ -27,7 +27,7 @@ export class AssetManager {
     AssetManager.preloadBitmapFonts();
   }
 
-  static async preload(progress: any) {
+  static async preload(progress?: any) {
     utils.clearTextureCache();
 
     AssetManager.bundle = await Assets.loadBundle(

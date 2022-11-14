@@ -31,7 +31,9 @@ onMounted(async () => {
 
   SceneManager.changeScene(loadingView);
 
-  await AssetManager.preload(loadingView.updateProgress);
+  await AssetManager.preload((progress) => {
+    loadingView.updateProgress(progress);
+  });
 
   matchingPair = new MatchingPair();
 
