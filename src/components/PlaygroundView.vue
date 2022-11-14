@@ -1,8 +1,6 @@
 <script setup>
 import HeaderView from "@/components/HeaderView.vue";
 import { LoadingView } from "./LoadingViewScene";
-
-new LoadingView();
 </script>
 
 <template>

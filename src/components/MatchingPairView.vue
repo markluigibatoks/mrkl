@@ -18,11 +18,12 @@ onMounted(async () => {
     minFPS: 30,
   });
 
+  console.log(generateManifest(["matchingpair", "sounds", "fonts"]));
   await AssetManager.initialize(
     generateManifest(["matchingpair", "sounds", "fonts"])
   );
 
-  SceneManager.app.stage.addChild(new LoadingView());
+  SceneManager.app.stage.addChild(new MatchingPair());
 });
 </script>
 

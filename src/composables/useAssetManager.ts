@@ -17,8 +17,6 @@ export class AssetManager {
     console.log(sound);
     // DANGER!! DO NOT REMOVE
 
-    const bundles = manifest.bundles.map((x) => x.name);
-
     const bundle = manifest.bundles[0].name;
 
     Assets.backgroundLoadBundle(bundle);

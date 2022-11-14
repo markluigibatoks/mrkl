@@ -18,6 +18,7 @@ onMounted(async () => {
     minFPS: 30,
   });
 
+  console.log(generateManifest(["mainview", "fonts"]));
   await AssetManager.initialize(generateManifest(["mainview", "fonts"]));
 
   SceneManager.app.stage.addChild(new MainView());
