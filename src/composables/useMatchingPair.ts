@@ -41,6 +41,8 @@ export class Card extends Container implements ICard {
     this.timeline = gsap.timeline();
 
     this.cardSprite = new Sprite(AssetManager.bundle[backImage]);
+    this.cardSprite.width = 80;
+    this.cardSprite.height = 80;
     this.cardSprite.anchor.set(0.5);
     this.cardSprite.position.set(this.width / 2, this.height / 2);
 
@@ -48,6 +50,8 @@ export class Card extends Container implements ICard {
     this.interactive = true;
 
     this.pairedSprite = new Sprite(AssetManager.bundle[pairedImage]);
+    this.pairedSprite.width = 80;
+    this.pairedSprite.height = 80;
     this.pairedSprite.anchor.set(0.5);
     this.pairedSprite.position.set(this.width / 2, this.height / 2);
     this.pairedSprite.alpha = 0;
@@ -79,7 +83,7 @@ export class Card extends Container implements ICard {
 
     timeline.to(this.cardSprite, {
       pixi: {
-        width: this.cardSprite.texture.width,
+        width: 80,
       },
       ease: "power4",
       duration: 0.5,
@@ -142,7 +146,7 @@ export class MatchingPair extends Container {
     this.openedCards = [];
     this.pairs = [];
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= size; i++) {
       this.pairs.push(this.createCard(i, `${i}`, "back", "check"));
       this.pairs.push(this.createCard(i, `${i}`, "back", "check"));
     }

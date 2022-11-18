@@ -2,27 +2,26 @@
 import { onMounted, ref } from "vue";
 import { AssetManager } from "@/composables/useAssetManager";
 import { SceneManager } from "@/composables/useSceneManager";
-import { MatchingPair } from "@/composables/useMatchingPair";
 import { LoadingView } from "@/components/LoadingViewScene";
 import generateManifest from "@/composables/useGenerateManifest";
+import { MatchingPairLobby } from "./MatchingPairLobbyScene";
 
 const canvas = ref(null);
 
 let loadingView = null;
-let matchingPair = null;
+let matchingPairLobby = null;
 
 onMounted(async () => {
   SceneManager.initialize({
     canvasHolder: canvas.value,
     width: 960,
     height: 540,
-    backgroundColor: 0x000000,
+    backgroundColor: 0xf3f3f3,
     maxFPS: 12,
     minFPS: 12,
     size: "contain",
   });
 
-  console.log(generateManifest(["matchingpair", "sounds", "fonts"]));
   await AssetManager.initialize(
     generateManifest(["matchingpair", "sounds", "fonts"])
   );
@@ -35,9 +34,9 @@ onMounted(async () => {
     loadingView.updateProgress(progress);
   });
 
-  matchingPair = new MatchingPair();
+  matchingPairLobby = new MatchingPairLobby();
 
-  SceneManager.changeScene(matchingPair);
+  SceneManager.changeScene(matchingPairLobby);
 });
 </script>
 
