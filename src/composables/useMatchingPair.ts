@@ -71,7 +71,7 @@ export class Card extends Container implements ICard {
 
     timeline.to(this.cardSprite, {
       pixi: {
-        scaleX: 0,
+        width: 0,
       },
       ease: "power4",
       duration: 0.5,
