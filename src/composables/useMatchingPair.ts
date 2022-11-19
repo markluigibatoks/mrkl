@@ -63,6 +63,7 @@ export class Card extends Container implements ICard {
   }
 
   flip(): gsap.timeline {
+    console.log("flip start");
     const texture = this.isFlip ? this.backImage : this.frontImage;
     this.isFlip = !this.isFlip;
 
@@ -89,6 +90,8 @@ export class Card extends Container implements ICard {
       ease: "power4",
       duration: 0.5,
     });
+
+    console.log("flip end");
 
     return timeline;
   }
