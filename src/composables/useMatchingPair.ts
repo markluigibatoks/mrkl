@@ -1,7 +1,6 @@
 import { Container, Sprite, Text } from "pixi.js";
 import gsap from "@/composables/useGSAP";
 import { AssetManager } from "@/composables/useAssetManager";
-import { m } from "vitest/dist/index-40e0cb97";
 
 export interface ICard {
   value: number;
@@ -157,6 +156,7 @@ export class MatchingPair extends Container {
   openedCards: Card[];
   cards: Card[];
   countdown: Text;
+  resetSprite: Sprite;
 
   constructor(size: number) {
     super();
@@ -171,11 +171,18 @@ export class MatchingPair extends Container {
       strokeThickness: 1,
       trim: true,
     });
+    this.resetSprite = new Sprite(AssetManager.bundle["retry-button"]);
+    this.resetSprite.scale.set(0.15);
+    this.resetSprite.alpha = 0;
+    this.resetSprite.cursor = "pointer";
+    this.resetSprite.interactive = false;
 
     for (let i = 1; i <= size; i++) {
       this.pairs.push(this.createCard(i, `${i}`, "back", "check"));
       this.pairs.push(this.createCard(i, `${i}`, "back", "check"));
     }
+
+    this.positionItems(10);
 
     this.on("insert" as any, () => {
       if (!(this.openedCards.length >= 2)) {
@@ -185,9 +192,12 @@ export class MatchingPair extends Container {
       if (this.isPair()) {
         this.openedCards.forEach((card) => card.paired());
         this.disableCard();
-        this.isWin()
+        const isWin = this.isWin();
+        isWin
           ? AssetManager.bundle["good-result"].play()
           : AssetManager.bundle["yay"].play();
+        this.resetSprite.alpha = Number(isWin);
+        this.resetSprite.interactive = isWin;
       } else {
         AssetManager.bundle["cartoon-hop"].play();
         this.openedCards.forEach((card) => card.flip());
@@ -195,22 +205,47 @@ export class MatchingPair extends Container {
       }
     });
 
+    this.resetSprite.on("pointerdown", () => {
+      this.reset();
+    });
+
     this.addChild(...this.pairs);
     this.addChild(this.countdown);
+    this.addChild(this.resetSprite);
     this.sortableChildren = true;
+
+    this.resetSprite.anchor.set(0.5);
+    this.resetSprite.position.set(this.width / 2, this.height / 2);
+
+    console.log(this);
+
+    this.countdown.anchor.set(0.5);
+    this.countdown.position.set(this.width / 2, this.height / 2);
 
     this.start();
   }
 
   reset() {
     this.openedCards = [];
+
+    this.start();
+  }
+
+  hideCards() {
+    this.cards.forEach((card) => {
+      card.alpha = 0;
+    });
   }
 
   start() {
+    this.resetSprite.alpha = 0;
+    this.resetSprite.interactive = false;
+
+    this.hideCards();
+
     this.shuffleCards();
+
     this.positionItems(10);
-    this.countdown.anchor.set(0.5);
-    this.countdown.position.set(this.width / 2, this.height / 2);
 
     const timeline = gsap.timeline();
 
