@@ -249,7 +249,7 @@ export class MatchingPair extends Container {
 
     this.hideCards();
 
-    this.shuffleCards();
+    // this.shuffleCards();
 
     this.positionItems(10);
 
