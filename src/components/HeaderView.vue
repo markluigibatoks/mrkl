@@ -107,7 +107,7 @@ function navAnimation(duration) {
       class="relative z-20 flex h-14 items-center justify-between bg-white px-6 shadow-lg lg:px-0"
     >
       <div
-        class="cursor-pointer text-4xl font-bold text-[#e91e63]"
+        class="cursor-pointer select-none text-4xl font-bold text-[#e91e63]"
         @click="toggleMenu(), (open = !open)"
       >
         mrkl
