@@ -196,7 +196,7 @@ export class MatchingPair extends Container {
       }
 
       if (this.isPair()) {
-        // this.openedCards.forEach((card) => card.paired());
+        this.openedCards.forEach((card) => card.paired());
         this.disableCard();
         const isWin = this.isWin();
         isWin
