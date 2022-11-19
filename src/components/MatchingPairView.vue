@@ -41,5 +41,5 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div ref="canvas"></div>
+  <div ref="canvas" class="flex items-center justify-center"></div>
 </template>

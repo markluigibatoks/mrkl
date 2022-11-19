@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from "@/components/HomeView.vue";
 import Playground from "@/components/PlaygroundView.vue";
 import MatchingPair from "@/components/MatchingPairView.vue";
+import Tetris from "@/components/TetrisView.vue";
 import NotFound from "@/components/NotFoundView.vue";
 
 const routes = [
@@ -20,13 +21,18 @@ const routes = [
         name: "MatchingPair",
         component: MatchingPair,
       },
-    ]
+      {
+        path: "tetris",
+        name: "Tetris",
+        component: Tetris,
+      },
+    ],
   },
   {
     path: "/:catchAll(.*)",
     name: "NotFound",
-    component: NotFound
-  }
+    component: NotFound,
+  },
 ];
 
 const router = createRouter({
