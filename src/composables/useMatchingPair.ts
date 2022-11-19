@@ -64,6 +64,7 @@ export class Card extends Container implements ICard {
 
   flip(): gsap.timeline {
     const texture = this.isFlip ? this.backImage : this.frontImage;
+    this.isFlip = !this.isFlip;
 
     const timeline = gsap.timeline();
 
@@ -87,10 +88,6 @@ export class Card extends Container implements ICard {
       },
       ease: "power4",
       duration: 0.5,
-    });
-
-    timeline.set(this, {
-      isFlip: !this.isFlip,
     });
 
     return timeline;
@@ -148,6 +145,12 @@ export class Card extends Container implements ICard {
     });
 
     return timeline;
+  }
+
+  reset() {
+    this.timeline.clear();
+    this.isFlip = false;
+    this.cardSprite.texture = AssetManager.bundle[this.backImage];
   }
 }
 
@@ -217,8 +220,6 @@ export class MatchingPair extends Container {
     this.resetSprite.anchor.set(0.5);
     this.resetSprite.position.set(this.width / 2, this.height / 2);
 
-    console.log(this);
-
     this.countdown.anchor.set(0.5);
     this.countdown.position.set(this.width / 2, this.height / 2);
 
@@ -227,6 +228,11 @@ export class MatchingPair extends Container {
 
   reset() {
     this.openedCards = [];
+    this.cards.forEach((card) => {
+      card.reset();
+      card.interactive = true;
+      card.cursor = "pointer";
+    });
 
     this.start();
   }
@@ -306,7 +312,7 @@ export class MatchingPair extends Container {
   }
 
   clearOpenedCards() {
-    this.openedCards = [];
+    this.openedCards = this.openedCards.slice(2);
   }
 
   disableCard() {
