@@ -1,4 +1,4 @@
-import { Container, Sprite, Text } from "pixi.js";
+import { Container, Sprite, Text, Texture, Assets } from "pixi.js";
 import gsap from "@/composables/useGSAP";
 import { AssetManager } from "@/composables/useAssetManager";
 
@@ -181,8 +181,8 @@ export class MatchingPair extends Container {
     this.resetSprite.interactive = false;
 
     for (let i = 1; i <= size; i++) {
-      this.pairs.push(this.createCard(i, `${i}`, "back", "correct"));
-      this.pairs.push(this.createCard(i, `${i}`, "back", "correct"));
+      this.pairs.push(this.createCard(i, `${i}`, "back", "paint-check"));
+      this.pairs.push(this.createCard(i, `${i}`, "back", "paint-check"));
     }
 
     this.positionItems(10);
