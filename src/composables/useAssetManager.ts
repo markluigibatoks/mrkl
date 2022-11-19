@@ -34,8 +34,6 @@ export class AssetManager {
       AssetManager.manifest.bundles[0].name,
       progress
     );
-
-    console.log(AssetManager.bundle);
   }
 
   static preloadBitmapFonts() {
