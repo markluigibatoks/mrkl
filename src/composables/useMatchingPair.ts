@@ -61,11 +61,14 @@ export class Card extends Container implements ICard {
   }
 
   flip(): gsap.timeline {
-    console.log("flip start");
     const texture = this.isFlip ? this.backImage : this.frontImage;
     this.isFlip = !this.isFlip;
 
-    const timeline = gsap.timeline();
+    const timeline = gsap.timeline({
+      onComplete: () => {
+        console.log("completed yey!");
+      },
+    });
 
     timeline.to(this.cardSprite, {
       pixi: {
@@ -83,13 +86,14 @@ export class Card extends Container implements ICard {
 
     timeline.to(this.cardSprite, {
       pixi: {
-        width: 80,
+        scaleX: 1,
       },
       ease: "power4",
       duration: 0.5,
+      onUpdate: () => {
+        console.log("update?");
+      },
     });
-
-    console.log("flip end");
 
     return timeline;
   }
