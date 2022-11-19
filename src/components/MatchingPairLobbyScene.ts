@@ -1,7 +1,8 @@
 import { Container, BitmapText, Text, Sprite } from "pixi.js";
-import { MatchingPair } from "../composables/useMatchingPair";
-import { SceneManager } from "../composables/useSceneManager";
-import { AssetManager } from "../composables/useAssetManager";
+import { MatchingPair } from "@/composables/useMatchingPair";
+import { SceneManager } from "@/composables/useSceneManager";
+import { AssetManager } from "@/composables/useAssetManager";
+import { MatchingPairScene } from "@/components/MatchingPairScene";
 
 export class MatchingPairLobby extends Container {
   constructor() {
@@ -63,7 +64,6 @@ export class MatchingPairLobby extends Container {
   }
 
   play() {
-    const matchingPair = new MatchingPair(10);
-    SceneManager.changeScene(matchingPair);
+    SceneManager.changeScene(new MatchingPairScene());
   }
 }

@@ -338,10 +338,9 @@ export class MatchingPair extends Container {
       yPosition = 0;
 
     this.pairs.map((card, index) => {
-      xPosition += card.width + gap;
-
       card.position.set(xPosition, yPosition);
 
+      xPosition += card.width + gap;
       if ((index + 1) % 5 === 0) {
         xPosition = 0;
         yPosition += card.height + gap;
