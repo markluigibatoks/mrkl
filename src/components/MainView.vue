@@ -14,8 +14,8 @@ onMounted(async () => {
     width: 960,
     height: 540,
     backgroundColor: 0x000000,
-    maxFPS: 12,
-    minFPS: 12,
+    maxFPS: 0,
+    minFPS: 10,
   });
 
   await AssetManager.initialize(generateManifest(["mainview", "fonts"]));
