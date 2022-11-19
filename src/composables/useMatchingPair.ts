@@ -181,8 +181,8 @@ export class MatchingPair extends Container {
     this.resetSprite.interactive = false;
 
     for (let i = 1; i <= size; i++) {
-      this.pairs.push(this.createCard(i, `${i}`, "back", "check"));
-      this.pairs.push(this.createCard(i, `${i}`, "back", "check"));
+      this.pairs.push(this.createCard(i, `${i}`, "back", "pair"));
+      this.pairs.push(this.createCard(i, `${i}`, "back", "pair"));
     }
 
     this.positionItems(10);
