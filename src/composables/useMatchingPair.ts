@@ -1,6 +1,7 @@
-import { Container, Sprite, Texture } from "pixi.js";
+import { Container, Sprite, Text } from "pixi.js";
 import gsap from "@/composables/useGSAP";
 import { AssetManager } from "@/composables/useAssetManager";
+import { m } from "vitest/dist/index-40e0cb97";
 
 export interface ICard {
   value: number;
@@ -11,7 +12,7 @@ export interface ICard {
   timeline: gsap.timeline;
 
   flip(): gsap.timeline;
-  fadeIn(): gsap.timeline;
+  fadeIn(duration: number): gsap.timeline;
   paired(): gsap.timeline;
 }
 
@@ -129,8 +130,25 @@ export class Card extends Container implements ICard {
     return timeline;
   }
 
-  fadeIn() {
-    throw new Error("Method not implemented.");
+  fadeIn(duration: number) {
+    const timeline = gsap.timeline();
+
+    timeline.set(this, {
+      pixi: {
+        alpha: 0,
+        scale: 0,
+      },
+    });
+
+    timeline.to(this, {
+      pixi: {
+        alpha: 1,
+        scale: 1,
+      },
+      duration,
+    });
+
+    return timeline;
   }
 }
 
@@ -138,6 +156,7 @@ export class MatchingPair extends Container {
   pairs: Container[];
   openedCards: Card[];
   cards: Card[];
+  countdown: Text;
 
   constructor(size: number) {
     super();
@@ -145,14 +164,18 @@ export class MatchingPair extends Container {
     this.cards = [];
     this.openedCards = [];
     this.pairs = [];
+    this.countdown = new Text("3", {
+      fill: 0xe91e63,
+      fontFamily: "Roboto Regular",
+      fontSize: 120,
+      strokeThickness: 1,
+      trim: true,
+    });
 
     for (let i = 1; i <= size; i++) {
       this.pairs.push(this.createCard(i, `${i}`, "back", "check"));
       this.pairs.push(this.createCard(i, `${i}`, "back", "check"));
     }
-
-    this.shuffleCards();
-    this.positionItems(10);
 
     this.on("insert" as any, () => {
       if (!(this.openedCards.length >= 2)) {
@@ -173,7 +196,74 @@ export class MatchingPair extends Container {
     });
 
     this.addChild(...this.pairs);
+    this.addChild(this.countdown);
     this.sortableChildren = true;
+
+    this.start();
+  }
+
+  reset() {
+    this.openedCards = [];
+  }
+
+  start() {
+    this.shuffleCards();
+    this.positionItems(10);
+    this.countdown.anchor.set(0.5);
+    this.countdown.position.set(this.width / 2, this.height / 2);
+
+    const timeline = gsap.timeline();
+
+    this.countdownAnimation();
+    this.pairs.forEach((pair) => {
+      const card: Card = pair.children[0] as Card;
+      timeline.add(card.fadeIn(3 / 20));
+    });
+  }
+
+  countdownAnimation() {
+    const timeline = gsap.timeline();
+
+    timeline.set(this, {
+      pixi: {
+        interactiveChildren: false,
+      },
+    });
+
+    for (let i = 3; i >= 1; i--) {
+      timeline.set(this.countdown, {
+        pixi: {
+          text: i,
+          scale: 1.5,
+          alpha: 0,
+        },
+        onComplete: () => {
+          AssetManager.bundle["boing"].play();
+        },
+      });
+
+      timeline.to(this.countdown, {
+        pixi: {
+          alpha: 1,
+          scale: 1,
+        },
+        duration: 1,
+      });
+
+      timeline.set(this.countdown, {
+        pixi: {
+          alpha: 0,
+        },
+      });
+    }
+
+    timeline.set(this, {
+      pixi: {
+        interactiveChildren: true,
+      },
+    });
+
+    return timeline;
   }
 
   isWin(): boolean {
@@ -223,6 +313,7 @@ export class MatchingPair extends Container {
     container.sortableChildren = true;
 
     const card = new Card(key, frontImage, backImage, pairedImage);
+    card.alpha = 0;
     this.cards.push(card);
     container.addChild(card);
     card.position.set(container.width * 0.5, container.height * 0.5);

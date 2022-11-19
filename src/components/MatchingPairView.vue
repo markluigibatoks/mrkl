@@ -17,8 +17,8 @@ onMounted(async () => {
     width: 960,
     height: 540,
     backgroundColor: 0xf3f3f3,
-    maxFPS: 12,
-    minFPS: 12,
+    maxFPS: 0,
+    minFPS: 10,
     size: "contain",
   });
 
