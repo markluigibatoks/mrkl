@@ -6,13 +6,13 @@ export interface ICard {
   value: number;
   frontImage: string;
   backImage: string;
-  // pairedImage: string;
+  pairedImage: string;
   isFlip: boolean;
   timeline: gsap.timeline;
 
   flip(): gsap.timeline;
   fadeIn(duration: number): gsap.timeline;
-  // paired(): gsap.timeline;
+  paired(): gsap.timeline;
 }
 
 export class Card extends Container implements ICard {
@@ -22,7 +22,7 @@ export class Card extends Container implements ICard {
   pairedImage: string;
   isFlip: boolean;
   timeline: gsap.timeline;
-  // pairedSprite: Sprite;
+  pairedSprite: Sprite;
   cardSprite: Sprite;
 
   constructor(
@@ -41,21 +41,23 @@ export class Card extends Container implements ICard {
     this.timeline = gsap.timeline();
 
     this.cardSprite = new Sprite(AssetManager.bundle[backImage]);
+    this.cardSprite.width = 80;
+    this.cardSprite.height = 80;
     this.cardSprite.anchor.set(0.5);
     this.cardSprite.position.set(this.width / 2, this.height / 2);
 
     this.cursor = "pointer";
     this.interactive = true;
 
-    // this.pairedSprite = new Sprite(AssetManager.bundle[pairedImage]);
-    // this.pairedSprite.width = 80;
-    // this.pairedSprite.height = 80;
-    // this.pairedSprite.anchor.set(0.5);
-    // this.pairedSprite.position.set(this.width / 2, this.height / 2);
-    // this.pairedSprite.alpha = 0;
+    this.pairedSprite = new Sprite(AssetManager.bundle[pairedImage]);
+    this.pairedSprite.width = 80;
+    this.pairedSprite.height = 80;
+    this.pairedSprite.anchor.set(0.5);
+    this.pairedSprite.position.set(this.width / 2, this.height / 2);
+    this.pairedSprite.alpha = 0;
 
     this.addChild(this.cardSprite);
-    // this.addChild(this.pairedSprite);
+    this.addChild(this.pairedSprite);
 
     this.sortableChildren = true;
   }
@@ -94,38 +96,38 @@ export class Card extends Container implements ICard {
     return timeline;
   }
 
-  // paired() {
-  //   const timeline = gsap.timeline();
+  paired() {
+    const timeline = gsap.timeline();
 
-  //   timeline.set(this.pairedSprite, {
-  //     pixi: {
-  //       scale: 0,
-  //       alpha: 1,
-  //     },
-  //   });
+    timeline.set(this.pairedSprite, {
+      pixi: {
+        scale: 0,
+        alpha: 1,
+      },
+    });
 
-  //   timeline.to(this.pairedSprite, {
-  //     pixi: {
-  //       scale: 1,
-  //     },
-  //   });
+    timeline.to(this.pairedSprite, {
+      pixi: {
+        scale: 1,
+      },
+    });
 
-  //   timeline.to(this.pairedSprite, {
-  //     pixi: {
-  //       scale: 1.3,
-  //       alpha: 0.2,
-  //     },
-  //   });
+    timeline.to(this.pairedSprite, {
+      pixi: {
+        scale: 1.3,
+        alpha: 0.2,
+      },
+    });
 
-  //   timeline.set(this.pairedSprite, {
-  //     pixi: {
-  //       scale: 0.1,
-  //       alpha: 0,
-  //     },
-  //   });
+    timeline.set(this.pairedSprite, {
+      pixi: {
+        scale: 0.1,
+        alpha: 0,
+      },
+    });
 
-  //   return timeline;
-  // }
+    return timeline;
+  }
 
   fadeIn(duration: number) {
     const timeline = gsap.timeline();
