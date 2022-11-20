@@ -1,5 +1,4 @@
 import { Container, BitmapText, Text, Sprite } from "pixi.js";
-import { MatchingPair } from "@/composables/useMatchingPair";
 import { SceneManager } from "@/composables/useSceneManager";
 import { AssetManager } from "@/composables/useAssetManager";
 import { MatchingPairScene } from "@/components/MatchingPairScene";
