@@ -143,7 +143,6 @@ function navAnimation(duration) {
         <li>
           <router-link
             :to="{ name: 'Home' }"
-            exact
             custom
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
@@ -163,7 +162,6 @@ function navAnimation(duration) {
         <li>
           <router-link
             :to="{ name: 'Playground' }"
-            exact
             custom
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
@@ -195,7 +193,6 @@ function navAnimation(duration) {
         >
           <router-link
             :to="{ name: 'Home' }"
-            exact
             custom
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
@@ -214,7 +211,6 @@ function navAnimation(duration) {
         >
           <router-link
             :to="{ name: 'Playground' }"
-            exact
             custom
             v-slot="{ href, navigate, isActive, isExactActive }"
           >

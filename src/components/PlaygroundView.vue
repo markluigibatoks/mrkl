@@ -18,7 +18,6 @@ import FooterView from "@/components/FooterView.vue";
         <li>
           <router-link
             :to="{ name: 'MatchingPair' }"
-            exact
             custom
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
@@ -37,7 +36,6 @@ import FooterView from "@/components/FooterView.vue";
         <li>
           <router-link
             :to="{ name: 'Tetris' }"
-            exact
             custom
             v-slot="{ href, navigate, isActive, isExactActive }"
           >
