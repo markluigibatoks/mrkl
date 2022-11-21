@@ -1,8 +1,43 @@
 import { Container, Graphics } from "pixi.js";
 
 // TODO: Create ITetrominoes
-// TODO: Create IRandomBag
-// TODO: Create IGrid
+
+export interface ITetrominoes {}
+
+export interface IRandomBag {
+  bag: ITetrominoes[];
+}
+
+export interface IGrid {
+  value: number;
+  colors: Record<string, number>;
+
+  reset(): void;
+}
+
+export class Grid extends Graphics implements IGrid {
+  value: number;
+  colors: Record<string, number>;
+
+  constructor(w: number, h: number) {
+    super();
+
+    this.lineStyle(1, 0x000000, 1, 0);
+    this.beginFill(0xffffff, 1);
+    this.drawRect(0, 0, w, h);
+    this.endFill();
+
+    this.value = 0;
+
+    this.colors = {
+      0: 0xffffff,
+    };
+  }
+
+  reset(): void {
+    this.tint = this.colors[this.value];
+  }
+}
 
 export class Tetris extends Container {
   constructor() {
@@ -13,7 +48,6 @@ export class Tetris extends Container {
     const size = 24;
 
     const matrixGrids = [];
-    const matrixValue = [];
 
     const board = new Graphics();
     board.lineStyle(1, 0x000000, 1, 1);
@@ -25,22 +59,14 @@ export class Tetris extends Container {
 
     for (let i = 0; i < 10; i++) {
       const array = [];
-      const value = [];
       for (let j = 0; j < rows; j++) {
-        const grid = new Graphics();
-        grid.lineStyle(1, 0x000000, 1, 0);
-        grid.beginFill(0xffffff, 1);
-        grid.drawRect(0, 0, size, size);
-        grid.endFill();
-
+        const grid = new Grid(size, size);
         grid.position.set(i * size, j * size);
 
         array.push(grid);
         this.addChild(grid);
-        value.push(0);
       }
       matrixGrids.push(array);
-      matrixValue.push(value);
     }
 
     this.sortableChildren = true;
@@ -66,4 +92,8 @@ export class Tetris extends Container {
     matrixGrids[2][16].tint = 0xa020f0;
     matrixGrids[1][17].tint = 0xa020f0;
   }
+
+  draw() {}
+
+  undraw() {}
 }
