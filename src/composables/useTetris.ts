@@ -15,6 +15,11 @@ export interface IGrid {
   reset(): void;
 }
 
+export interface IPosition {
+  x: number;
+  y: number;
+}
+
 export class Grid extends Graphics implements IGrid {
   value: number;
   colors: Record<string, number>;
@@ -40,14 +45,21 @@ export class Grid extends Graphics implements IGrid {
 }
 
 export class Tetris extends Container {
+  currentPosition: IPosition;
+  startingPosition: IPosition;
   constructor() {
     super();
 
     const rows = 20;
     const columns = 10;
     const size = 24;
-
+    this.startingPosition = {
+      x: 5,
+      y: 0,
+    };
     const matrixGrids = [];
+
+    this.currentPosition = this.startingPosition;
 
     const board = new Graphics();
     board.lineStyle(1, 0x000000, 1, 1);
@@ -93,7 +105,23 @@ export class Tetris extends Container {
     matrixGrids[1][17].tint = 0xa020f0;
   }
 
-  draw() {}
+  draw(shape: number[][]) {
+    shape.forEach((yValue, yIndex) => {
+      yValue.forEach((xValue, xIndex) => {
+        // TODO: Fill the matrixGrid with shape values
+        // TODO: Emit an event that a grid value has change
+        console.log(xValue);
+      });
+    });
+  }
 
-  undraw() {}
+  undraw(shape: number[][]) {
+    shape.forEach((yValue, yIndex) => {
+      yValue.forEach((xValue, xIndex) => {
+        // TODO: Fill the matrixGrid with default values
+        // TODO: Emit an event that a grid value has change
+        console.log(0);
+      });
+    });
+  }
 }
