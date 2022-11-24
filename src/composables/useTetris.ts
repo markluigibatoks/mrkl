@@ -300,6 +300,7 @@ export class Tetris extends Container implements IRandomBag {
   currentTetrominoes: ITetrominoes | undefined;
   gridMatrix: Grid[][];
   colorBank: string[];
+  startInterval;
 
   constructor() {
     super();
@@ -322,7 +323,7 @@ export class Tetris extends Container implements IRandomBag {
       "#9900ff",
       "#ff0000",
     ];
-    this.currentPosition = this.startingPosition;
+    this.currentPosition = { ...this.startingPosition };
     this.bag = [];
     this.currentTetrominoes = undefined;
 
@@ -348,20 +349,26 @@ export class Tetris extends Container implements IRandomBag {
 
     this.sortableChildren = true;
 
-    this.start();
+    this.init();
+
+    this.startInterval = setInterval(() => {
+      if (this.isFreeze(this.currentTetrominoes!.shapes[0].shape)) {
+        this.reset();
+        this.draw(this.currentTetrominoes!.shapes[0].shape);
+      }
+
+      this.undraw(this.currentTetrominoes!.shapes[0].shape);
+      this.currentPosition.y += 1;
+      this.draw(this.currentTetrominoes!.shapes[0].shape);
+    }, 1000);
   }
 
-  start() {
+  init() {
     this.populateRandomBag(10);
 
     this.currentTetrominoes = this.bag.shift();
 
     this.draw(this.currentTetrominoes!.shapes[0].shape);
-    setInterval(() => {
-      this.undraw(this.currentTetrominoes!.shapes[0].shape);
-      this.currentPosition.y += 1;
-      this.draw(this.currentTetrominoes!.shapes[0].shape);
-    }, 1000);
   }
 
   populateRandomBag(size: number) {
@@ -377,19 +384,46 @@ export class Tetris extends Container implements IRandomBag {
     return new TetrominoFactory().getTetromino(tetrominoes[index])!;
   }
 
-  reset(): void {
-    throw new Error("Method not implemented.");
-  }
-
   draw(shape: number[][]) {
     const position = this.currentPosition;
     shape.forEach((yValue, yIndex) => {
       yValue.forEach((xValue, xIndex) => {
-        this.gridMatrix[position.x + xIndex][position.y + yIndex].tint = !xValue
-          ? utils.string2hex(this.colorBank[0])
-          : utils.string2hex(this.colorBank[xValue]);
+        try {
+          this.gridMatrix[position.x + xIndex][position.y + yIndex].tint =
+            !xValue
+              ? utils.string2hex(this.colorBank[0])
+              : utils.string2hex(this.colorBank[xValue]);
+        } catch {
+          console.log("Out of Bounds");
+        }
       });
     });
+  }
+
+  reset() {
+    this.currentPosition = { ...this.startingPosition };
+    this.currentTetrominoes = this.bag.shift();
+
+    if (this.bag.length <= 2) {
+      this.populateRandomBag(10);
+    }
+  }
+
+  isFreeze(shape: number[][]) {
+    return shape.some((yValue, yIndex) => {
+      return yValue.some((xValue, xIndex) => {
+        return !xValue ? this.currentPosition.y + yIndex >= 20 : false;
+      });
+    });
+
+    /**
+     * Freeze the tetromino
+     *  - check if yValue is >= rows
+     *  - check if some parts of the shape will collide with another tetrominoes
+     * reset currentPosition
+     * currentTetrominoes = shift 1 Tetrominoes from RandomBag
+     * Populate the bag if there are 2 left in the bag
+     */
   }
 
   undraw(shape: number[][]) {
