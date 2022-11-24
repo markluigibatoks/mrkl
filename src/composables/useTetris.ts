@@ -1,11 +1,15 @@
 import { Container, Graphics } from "pixi.js";
 
-// TODO: Create ITetrominoes
+export interface ITetromino {
+  shape: number[][];
+}
 
-export interface ITetrominoes {}
+export interface ITetrominoes {
+  shapes: ITetromino[];
+}
 
 export interface IRandomBag {
-  bag: ITetrominoes[];
+  bag: ITetromino[];
 }
 
 export interface IGrid {
@@ -41,6 +45,251 @@ export class Grid extends Graphics implements IGrid {
 
   reset(): void {
     this.tint = this.colors[this.value];
+  }
+}
+
+export class Tetromino implements ITetromino {
+  shape: number[][];
+
+  constructor(shape: number[][]) {
+    this.shape = shape;
+  }
+}
+
+export class Tetrominoes implements ITetrominoes {
+  shapes: ITetromino[];
+
+  constructor(shapes: ITetromino[]) {
+    this.shapes = shapes;
+  }
+}
+
+export class I implements ITetrominoes {
+  shapes: ITetromino[];
+
+  constructor() {
+    this.shapes = [
+      new Tetromino([
+        [0, 0, 0, 0],
+        [1, 1, 1, 1],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+      ]),
+      new Tetromino([
+        [0, 0, 1, 0],
+        [0, 0, 1, 0],
+        [0, 0, 1, 0],
+        [0, 0, 1, 0],
+      ]),
+      new Tetromino([
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [1, 1, 1, 1],
+        [0, 0, 0, 0],
+      ]),
+      new Tetromino([
+        [0, 1, 0, 0],
+        [0, 1, 0, 0],
+        [0, 1, 0, 0],
+        [0, 1, 0, 0],
+      ]),
+    ];
+  }
+}
+
+export class J implements ITetrominoes {
+  shapes: ITetromino[];
+
+  constructor() {
+    this.shapes = [
+      new Tetromino([
+        [2, 0, 0],
+        [2, 2, 2],
+        [0, 0, 0],
+      ]),
+      new Tetromino([
+        [0, 2, 2],
+        [0, 2, 0],
+        [0, 2, 0],
+      ]),
+      new Tetromino([
+        [0, 0, 0],
+        [2, 2, 2],
+        [0, 0, 2],
+      ]),
+      new Tetromino([
+        [0, 2, 0],
+        [0, 2, 0],
+        [2, 2, 0],
+      ]),
+    ];
+  }
+}
+
+export class L implements ITetrominoes {
+  shapes: ITetromino[];
+
+  constructor() {
+    this.shapes = [
+      new Tetromino([
+        [0, 0, 3],
+        [3, 3, 3],
+        [0, 0, 0],
+      ]),
+      new Tetromino([
+        [0, 3, 0],
+        [0, 3, 0],
+        [0, 3, 3],
+      ]),
+      new Tetromino([
+        [0, 0, 0],
+        [3, 3, 3],
+        [3, 0, 0],
+      ]),
+      new Tetromino([
+        [3, 3, 0],
+        [0, 3, 0],
+        [0, 3, 0],
+      ]),
+    ];
+  }
+}
+
+export class O implements ITetrominoes {
+  shapes: ITetromino[];
+
+  constructor() {
+    this.shapes = [
+      new Tetromino([
+        [0, 4, 4, 0],
+        [0, 4, 4, 0],
+        [0, 0, 0, 0],
+      ]),
+      new Tetromino([
+        [0, 4, 4, 0],
+        [0, 4, 4, 0],
+        [0, 0, 0, 0],
+      ]),
+      new Tetromino([
+        [0, 4, 4, 0],
+        [0, 4, 4, 0],
+        [0, 0, 0, 0],
+      ]),
+      new Tetromino([
+        [0, 4, 4, 0],
+        [0, 4, 4, 0],
+        [0, 0, 0, 0],
+      ]),
+    ];
+  }
+}
+
+export class S implements ITetrominoes {
+  shapes: ITetromino[];
+
+  constructor() {
+    this.shapes = [
+      new Tetromino([
+        [0, 5, 5],
+        [5, 5, 0],
+        [0, 0, 0],
+      ]),
+      new Tetromino([
+        [0, 5, 0],
+        [0, 5, 5],
+        [0, 0, 5],
+      ]),
+      new Tetromino([
+        [0, 0, 0],
+        [0, 5, 5],
+        [5, 5, 0],
+      ]),
+      new Tetromino([
+        [5, 0, 0],
+        [5, 5, 0],
+        [0, 5, 0],
+      ]),
+    ];
+  }
+}
+
+export class T implements ITetrominoes {
+  shapes: ITetromino[];
+
+  constructor() {
+    this.shapes = [
+      new Tetromino([
+        [0, 6, 0],
+        [6, 6, 6],
+        [0, 0, 0],
+      ]),
+      new Tetromino([
+        [0, 6, 0],
+        [0, 6, 6],
+        [0, 6, 0],
+      ]),
+      new Tetromino([
+        [0, 0, 0],
+        [6, 6, 6],
+        [0, 6, 0],
+      ]),
+      new Tetromino([
+        [0, 6, 0],
+        [6, 6, 0],
+        [0, 6, 0],
+      ]),
+    ];
+  }
+}
+
+export class Z implements ITetrominoes {
+  shapes: ITetromino[];
+
+  constructor() {
+    this.shapes = [
+      new Tetromino([
+        [7, 7, 0],
+        [0, 7, 7],
+        [0, 0, 0],
+      ]),
+      new Tetromino([
+        [0, 0, 7],
+        [0, 7, 7],
+        [0, 7, 0],
+      ]),
+      new Tetromino([
+        [0, 0, 0],
+        [7, 7, 0],
+        [0, 7, 7],
+      ]),
+      new Tetromino([
+        [0, 7, 0],
+        [7, 7, 0],
+        [7, 0, 0],
+      ]),
+    ];
+  }
+}
+
+export class TetrominoFactory {
+  getTetromino(type: string): ITetrominoes | undefined {
+    if (type === "I") {
+      return new I();
+    } else if (type === "J") {
+      return new J();
+    } else if (type === "L") {
+      return new L();
+    } else if (type === "O") {
+      return new O();
+    } else if (type === "S") {
+      return new S();
+    } else if (type === "T") {
+      return new T();
+    } else if (type === "Z") {
+      return new Z();
+    }
+
+    return undefined;
   }
 }
 
