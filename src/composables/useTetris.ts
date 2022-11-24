@@ -1,4 +1,4 @@
-import { Container, Graphics } from "pixi.js";
+import { Container, Graphics, utils } from "pixi.js";
 
 export interface ITetromino {
   shape: number[][];
@@ -9,7 +9,7 @@ export interface ITetrominoes {
 }
 
 export interface IRandomBag {
-  bag: ITetromino[];
+  bag: ITetrominoes[];
 }
 
 export interface IGrid {
@@ -293,9 +293,14 @@ export class TetrominoFactory {
   }
 }
 
-export class Tetris extends Container {
+export class Tetris extends Container implements IRandomBag {
   currentPosition: IPosition;
   startingPosition: IPosition;
+  bag: ITetrominoes[];
+  currentTetrominoes: ITetrominoes | undefined;
+  gridMatrix: Grid[][];
+  colorBank: string[];
+
   constructor() {
     super();
 
@@ -303,12 +308,23 @@ export class Tetris extends Container {
     const columns = 10;
     const size = 24;
     this.startingPosition = {
-      x: 5,
+      x: 4,
       y: 0,
     };
-    const matrixGrids = [];
-
+    this.gridMatrix = [];
+    this.colorBank = [
+      "#ffffff",
+      "#00ffff",
+      "#0000ff",
+      "#ffaa00",
+      "#ffff00",
+      "#00ff00",
+      "#9900ff",
+      "#ff0000",
+    ];
     this.currentPosition = this.startingPosition;
+    this.bag = [];
+    this.currentTetrominoes = undefined;
 
     const board = new Graphics();
     board.lineStyle(1, 0x000000, 1, 1);
@@ -319,57 +335,70 @@ export class Tetris extends Container {
     this.addChild(board);
 
     for (let i = 0; i < 10; i++) {
-      const array = [];
+      const row = [];
       for (let j = 0; j < rows; j++) {
         const grid = new Grid(size, size);
         grid.position.set(i * size, j * size);
 
-        array.push(grid);
+        row.push(grid);
         this.addChild(grid);
       }
-      matrixGrids.push(array);
+      this.gridMatrix.push(row);
     }
 
     this.sortableChildren = true;
 
-    // Test
-    matrixGrids[0][19].tint = 0x00ff00;
-    matrixGrids[1][19].tint = 0x00ff00;
-    matrixGrids[1][18].tint = 0x00ff00;
-    matrixGrids[2][18].tint = 0x00ff00;
+    this.start();
+  }
 
-    matrixGrids[3][18].tint = 0xffff00;
-    matrixGrids[3][19].tint = 0xffff00;
-    matrixGrids[4][18].tint = 0xffff00;
-    matrixGrids[4][19].tint = 0xffff00;
+  start() {
+    this.populateRandomBag(10);
 
-    matrixGrids[5][18].tint = 0xff0000;
-    matrixGrids[6][18].tint = 0xff0000;
-    matrixGrids[6][19].tint = 0xff0000;
-    matrixGrids[7][19].tint = 0xff0000;
+    this.currentTetrominoes = this.bag.shift();
 
-    matrixGrids[0][16].tint = 0xa020f0;
-    matrixGrids[1][16].tint = 0xa020f0;
-    matrixGrids[2][16].tint = 0xa020f0;
-    matrixGrids[1][17].tint = 0xa020f0;
+    this.draw(this.currentTetrominoes!.shapes[0].shape);
+    setInterval(() => {
+      this.undraw(this.currentTetrominoes!.shapes[0].shape);
+      this.currentPosition.y += 1;
+      this.draw(this.currentTetrominoes!.shapes[0].shape);
+    }, 1000);
+  }
+
+  populateRandomBag(size: number) {
+    for (let i = 0; i < size; i++) {
+      this.bag.push(this.randomTetrominoes());
+    }
+  }
+
+  randomTetrominoes(): ITetrominoes {
+    const tetrominoes = ["I", "J", "L", "O", "S", "T", "Z"];
+    const index = Math.floor(Math.random() * 7);
+
+    return new TetrominoFactory().getTetromino(tetrominoes[index])!;
+  }
+
+  reset(): void {
+    throw new Error("Method not implemented.");
   }
 
   draw(shape: number[][]) {
+    const position = this.currentPosition;
     shape.forEach((yValue, yIndex) => {
       yValue.forEach((xValue, xIndex) => {
-        // TODO: Fill the matrixGrid with shape values
-        // TODO: Emit an event that a grid value has change
-        console.log(xValue);
+        this.gridMatrix[position.x + xIndex][position.y + yIndex].tint = !xValue
+          ? utils.string2hex(this.colorBank[0])
+          : utils.string2hex(this.colorBank[xValue]);
       });
     });
   }
 
   undraw(shape: number[][]) {
+    const position = this.currentPosition;
+
     shape.forEach((yValue, yIndex) => {
       yValue.forEach((xValue, xIndex) => {
-        // TODO: Fill the matrixGrid with default values
-        // TODO: Emit an event that a grid value has change
-        console.log(0);
+        this.gridMatrix[position.x + xIndex][position.y + yIndex].tint =
+          utils.string2hex(this.colorBank[0]);
       });
     });
   }
