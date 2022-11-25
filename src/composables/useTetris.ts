@@ -14,9 +14,6 @@ export interface IRandomBag {
 
 export interface IGrid {
   value: number;
-  colors: Record<string, number>;
-
-  reset(): void;
 }
 
 export interface IPosition {
@@ -26,7 +23,6 @@ export interface IPosition {
 
 export class Grid extends Graphics implements IGrid {
   value: number;
-  colors: Record<string, number>;
 
   constructor(w: number, h: number) {
     super();
@@ -37,14 +33,6 @@ export class Grid extends Graphics implements IGrid {
     this.endFill();
 
     this.value = 0;
-
-    this.colors = {
-      0: 0xffffff,
-    };
-  }
-
-  reset(): void {
-    this.tint = this.colors[this.value];
   }
 }
 
@@ -69,30 +57,10 @@ export class I implements ITetrominoes {
 
   constructor() {
     this.shapes = [
-      new Tetromino([
-        [0, 0, 0, 0],
-        [1, 1, 1, 1],
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-      ]),
-      new Tetromino([
-        [0, 0, 1, 0],
-        [0, 0, 1, 0],
-        [0, 0, 1, 0],
-        [0, 0, 1, 0],
-      ]),
-      new Tetromino([
-        [0, 0, 0, 0],
-        [0, 0, 0, 0],
-        [1, 1, 1, 1],
-        [0, 0, 0, 0],
-      ]),
-      new Tetromino([
-        [0, 1, 0, 0],
-        [0, 1, 0, 0],
-        [0, 1, 0, 0],
-        [0, 1, 0, 0],
-      ]),
+      new Tetromino([[1, 1, 1, 1]]),
+      new Tetromino([[1], [1], [1], [1]]),
+      new Tetromino([[1, 1, 1, 1]]),
+      new Tetromino([[1], [1], [1], [1]]),
     ];
   }
 }
@@ -105,22 +73,20 @@ export class J implements ITetrominoes {
       new Tetromino([
         [2, 0, 0],
         [2, 2, 2],
-        [0, 0, 0],
       ]),
       new Tetromino([
-        [0, 2, 2],
-        [0, 2, 0],
-        [0, 2, 0],
+        [2, 2],
+        [2, 0],
+        [2, 0],
       ]),
       new Tetromino([
-        [0, 0, 0],
         [2, 2, 2],
         [0, 0, 2],
       ]),
       new Tetromino([
-        [0, 2, 0],
-        [0, 2, 0],
-        [2, 2, 0],
+        [0, 2],
+        [0, 2],
+        [2, 2],
       ]),
     ];
   }
@@ -134,22 +100,20 @@ export class L implements ITetrominoes {
       new Tetromino([
         [0, 0, 3],
         [3, 3, 3],
-        [0, 0, 0],
       ]),
       new Tetromino([
-        [0, 3, 0],
-        [0, 3, 0],
-        [0, 3, 3],
+        [3, 0],
+        [3, 0],
+        [3, 3],
       ]),
       new Tetromino([
-        [0, 0, 0],
         [3, 3, 3],
         [3, 0, 0],
       ]),
       new Tetromino([
-        [3, 3, 0],
-        [0, 3, 0],
-        [0, 3, 0],
+        [3, 3],
+        [0, 3],
+        [0, 3],
       ]),
     ];
   }
@@ -161,24 +125,20 @@ export class O implements ITetrominoes {
   constructor() {
     this.shapes = [
       new Tetromino([
-        [0, 4, 4, 0],
-        [0, 4, 4, 0],
-        [0, 0, 0, 0],
+        [4, 4],
+        [4, 4],
       ]),
       new Tetromino([
-        [0, 4, 4, 0],
-        [0, 4, 4, 0],
-        [0, 0, 0, 0],
+        [4, 4],
+        [4, 4],
       ]),
       new Tetromino([
-        [0, 4, 4, 0],
-        [0, 4, 4, 0],
-        [0, 0, 0, 0],
+        [4, 4],
+        [4, 4],
       ]),
       new Tetromino([
-        [0, 4, 4, 0],
-        [0, 4, 4, 0],
-        [0, 0, 0, 0],
+        [4, 4],
+        [4, 4],
       ]),
     ];
   }
@@ -192,22 +152,20 @@ export class S implements ITetrominoes {
       new Tetromino([
         [0, 5, 5],
         [5, 5, 0],
-        [0, 0, 0],
       ]),
       new Tetromino([
-        [0, 5, 0],
-        [0, 5, 5],
-        [0, 0, 5],
+        [5, 0],
+        [5, 5],
+        [0, 5],
       ]),
       new Tetromino([
-        [0, 0, 0],
         [0, 5, 5],
         [5, 5, 0],
       ]),
       new Tetromino([
-        [5, 0, 0],
-        [5, 5, 0],
-        [0, 5, 0],
+        [5, 0],
+        [5, 5],
+        [0, 5],
       ]),
     ];
   }
@@ -221,22 +179,20 @@ export class T implements ITetrominoes {
       new Tetromino([
         [0, 6, 0],
         [6, 6, 6],
-        [0, 0, 0],
       ]),
       new Tetromino([
-        [0, 6, 0],
-        [0, 6, 6],
-        [0, 6, 0],
+        [6, 0],
+        [6, 6],
+        [6, 0],
       ]),
       new Tetromino([
-        [0, 0, 0],
         [6, 6, 6],
         [0, 6, 0],
       ]),
       new Tetromino([
-        [0, 6, 0],
-        [6, 6, 0],
-        [0, 6, 0],
+        [0, 6],
+        [6, 6],
+        [0, 6],
       ]),
     ];
   }
@@ -250,22 +206,20 @@ export class Z implements ITetrominoes {
       new Tetromino([
         [7, 7, 0],
         [0, 7, 7],
-        [0, 0, 0],
       ]),
       new Tetromino([
-        [0, 0, 7],
-        [0, 7, 7],
-        [0, 7, 0],
+        [0, 7],
+        [7, 7],
+        [7, 0],
       ]),
       new Tetromino([
-        [0, 0, 0],
         [7, 7, 0],
         [0, 7, 7],
       ]),
       new Tetromino([
-        [0, 7, 0],
-        [7, 7, 0],
-        [7, 0, 0],
+        [0, 7],
+        [7, 7],
+        [7, 0],
       ]),
     ];
   }
@@ -393,6 +347,8 @@ export class Tetris extends Container implements IRandomBag {
             !xValue
               ? utils.string2hex(this.colorBank[0])
               : utils.string2hex(this.colorBank[xValue]);
+          this.gridMatrix[position.x + xIndex][position.y + yIndex].value =
+            xValue;
         } catch {
           console.log("Out of Bounds");
         }
@@ -410,11 +366,28 @@ export class Tetris extends Container implements IRandomBag {
   }
 
   isFreeze(shape: number[][]) {
-    return shape.some((yValue, yIndex) => {
-      return yValue.some((xValue, xIndex) => {
-        return !xValue ? this.currentPosition.y + yIndex >= 20 : false;
+    const isOutOfBounds = shape.some((yValue, yIndex) => {
+      return yValue.some((xValue, _) => {
+        if (xValue !== 0) {
+          if (this.currentPosition.y + yIndex >= 19) {
+            return true;
+          }
+        }
+        return false;
       });
     });
+
+    let isTaken = false;
+    if (!isOutOfBounds) {
+      isTaken = shape[shape.length - 1].some((_, index) => {
+        return (
+          this.gridMatrix[this.currentPosition.x + index][
+            this.currentPosition.y + shape.length
+          ].value !== 0
+        );
+      });
+    }
+    return isOutOfBounds || isTaken;
 
     /**
      * Freeze the tetromino
@@ -430,9 +403,10 @@ export class Tetris extends Container implements IRandomBag {
     const position = this.currentPosition;
 
     shape.forEach((yValue, yIndex) => {
-      yValue.forEach((xValue, xIndex) => {
+      yValue.forEach((_, xIndex) => {
         this.gridMatrix[position.x + xIndex][position.y + yIndex].tint =
           utils.string2hex(this.colorBank[0]);
+        this.gridMatrix[position.x + xIndex][position.y + yIndex].value = 0;
       });
     });
   }
