@@ -5,6 +5,7 @@ import { SceneManager } from "@/composables/useSceneManager";
 import { LoadingView } from "@/components/LoadingViewScene";
 import generateManifest from "@/composables/useGenerateManifest";
 import { ParticlesScene } from "@/components/ParticlesScene";
+import { TextScene } from "@/components/TextScene";
 
 const canvas = ref(null);
 
@@ -16,7 +17,7 @@ onMounted(async () => {
     canvasHolder: canvas.value,
     width: 960,
     height: 540,
-    backgroundColor: 0xf3f3f3,
+    backgroundAlpha: 1,
     maxFPS: 0,
     minFPS: 10,
     size: "contain",
@@ -31,6 +32,8 @@ onMounted(async () => {
   await AssetManager.preload((progress) => {
     loadingView.updateProgress(progress);
   });
+
+  SceneManager.changeScene(new TextScene());
 
   particlesScene = new ParticlesScene();
 

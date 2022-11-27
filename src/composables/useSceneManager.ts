@@ -7,6 +7,7 @@ interface SceneOptions {
   resolution?: number;
   autoDensity?: boolean;
   backgroundColor?: number;
+  backgroundAlpha?: number;
   antialias?: boolean;
   maxFPS?: number;
   minFPS?: number;
@@ -30,6 +31,7 @@ export class SceneManager {
     resolution = window.devicePixelRatio || 1,
     autoDensity = true,
     backgroundColor = 0x000000,
+    backgroundAlpha = 1,
     antialias = true,
     maxFPS = 60,
     minFPS = 60,
@@ -46,6 +48,7 @@ export class SceneManager {
       resolution,
       autoDensity,
       backgroundColor,
+      backgroundAlpha,
       antialias,
     });
 

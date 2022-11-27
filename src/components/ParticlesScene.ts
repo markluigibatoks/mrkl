@@ -1,6 +1,7 @@
-import { Container, Sprite, Texture, ParticleContainer } from "pixi.js";
+import { Container, Sprite, Texture, ParticleContainer, Text } from "pixi.js";
 import { SceneManager } from "@/composables/useSceneManager";
 import { Particle } from "@/composables/useParticle";
+import gsap from "@/composables/useGSAP";
 
 export interface IMouse {
   x: number;
@@ -12,14 +13,40 @@ export class ParticlesScene extends Container {
   particles: Particle[];
   particleContainer: ParticleContainer;
   mouse: IMouse;
+  isReady: boolean;
 
   constructor() {
     super();
 
+    this.isReady = false;
+
+    const tmpCanvas = SceneManager.app.renderer.extract.canvas(
+      SceneManager.app.stage
+    );
+    const imageData = tmpCanvas
+      .getContext("2d")
+      .getImageData(
+        0,
+        0,
+        SceneManager.app.renderer.width,
+        SceneManager.app.renderer.height
+      );
+
+    let widthDiff = (SceneManager.app.renderer.width - tmpCanvas.width) / 2;
+    let heightDiff = (SceneManager.app.renderer.height - tmpCanvas.height) / 2;
+
+    if (widthDiff < 0) {
+      widthDiff = 0;
+    }
+
+    if (heightDiff < 0) {
+      heightDiff = 0;
+    }
+
     this.mouse = {
       x: 0,
       y: 0,
-      radius: 150,
+      radius: 100,
     };
 
     this.on("pointermove", (event) => {
@@ -47,11 +74,39 @@ export class ParticlesScene extends Container {
 
     this.addChild(this.particleContainer);
 
+    const legend = new Text('Mouse hover on the text "mrkl"', {
+      fill: 0xffffff,
+      fontSize: 16,
+    });
+    this.addChild(legend);
+    legend.anchor.set(0.5, 0);
+    legend.position.set(SceneManager.width / 2, 0);
+    legend.alpha = 0;
+
     this.sortableChildren = true;
 
-    this.setup();
+    for (let y = 0; y < tmpCanvas.height; y += 8) {
+      for (let x = 0; x < tmpCanvas.width; x += 8) {
+        if (imageData.data[(y * imageData.width + x) * 4 + 3] > 128) {
+          const particle = new Particle(x + widthDiff, y + heightDiff);
+          this.particles.push(particle);
+          this.particleContainer.addChild(particle);
+        }
+      }
+    }
+
+    this.animateParticles();
 
     SceneManager.app.ticker.add(() => {
+      if (!this.isReady) {
+        return;
+      }
+
+      legend.alpha += 0.005;
+      if (legend.alpha >= 1) {
+        legend.alpha = 0;
+      }
+
       this.particles.forEach((particle) => {
         const dx = this.mouse.x - particle.x;
         const dy = this.mouse.y - particle.y;
@@ -82,13 +137,66 @@ export class ParticlesScene extends Container {
     });
   }
 
-  setup() {
-    for (let i = 0; i < 1500; i++) {
-      const x = Math.random() * SceneManager.width;
-      const y = Math.random() * SceneManager.height;
-      const particle = new Particle(x, y);
-      this.particles.push(particle);
-      this.particleContainer.addChild(particle);
+  animateParticles() {
+    const timeline = gsap.timeline();
+
+    let xPosition = 0;
+    let yPosition = 0;
+    const gap = Math.round(
+      (SceneManager.width * SceneManager.height) / 16 / this.particles.length
+    );
+
+    for (let i = 0; i < this.particles.length; i++) {
+      timeline.to(
+        this.particles[i],
+        {
+          pixi: {
+            positionX: xPosition,
+            positionY: yPosition,
+          },
+          duration: Math.random() * 2,
+          delay: 2,
+        },
+        "start"
+      );
+      xPosition += gap;
+
+      if (xPosition > 960) {
+        yPosition += gap;
+        xPosition = 0;
+      }
     }
+
+    for (let i = 0; i < this.particles.length; i++) {
+      timeline.to(
+        this.particles[i],
+        {
+          pixi: {
+            positionX: Math.random() * SceneManager.width,
+            positionY: Math.random() * SceneManager.height,
+          },
+          duration: 1,
+        },
+        "middle1"
+      );
+    }
+
+    for (let i = 0; i < this.particles.length; i++) {
+      timeline.to(
+        this.particles[i],
+        {
+          pixi: {
+            positionX: SceneManager.width / 2,
+            positionY: SceneManager.height / 2,
+          },
+          duration: 1,
+        },
+        "middle2"
+      );
+    }
+
+    timeline.set(this, {
+      isReady: true,
+    });
   }
 }
