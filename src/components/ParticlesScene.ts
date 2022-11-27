@@ -24,7 +24,7 @@ export class ParticlesScene extends Container {
       SceneManager.app.stage
     );
     const imageData = tmpCanvas
-      .getContext("2d")
+      .getContext("2d", { willReadFrequently: true })
       .getImageData(
         0,
         0,
@@ -32,8 +32,8 @@ export class ParticlesScene extends Container {
         SceneManager.app.renderer.height
       );
 
-    let widthDiff = (SceneManager.app.renderer.width - tmpCanvas.width) / 2;
-    let heightDiff = (SceneManager.app.renderer.height - tmpCanvas.height) / 2;
+    let widthDiff = (SceneManager.width - tmpCanvas.width) / 2;
+    let heightDiff = (SceneManager.height - tmpCanvas.height) / 2;
 
     if (widthDiff < 0) {
       widthDiff = 0;
