@@ -23,7 +23,6 @@ export class ParticlesScene extends Container {
     };
 
     this.on("pointermove", (event) => {
-      console.log((SceneManager.app.view as HTMLCanvasElement).offsetLeft);
       this.mouse.x = event.global.x;
       this.mouse.y = event.global.y;
     });
@@ -38,11 +37,11 @@ export class ParticlesScene extends Container {
     background.tint = 0x000000;
     this.addChild(background);
 
-    this.particleContainer = new ParticleContainer(1500, {
+    this.particleContainer = new ParticleContainer(30000, {
       scale: true,
       position: true,
-      rotation: true,
-      uvs: true,
+      rotation: false,
+      uvs: false,
       alpha: true,
     });
 
@@ -84,10 +83,12 @@ export class ParticlesScene extends Container {
   }
 
   setup() {
-    for (let i = 0; i < 1500; i++) {
+    for (let i = 0; i < 30000; i++) {
       const x = Math.random() * SceneManager.width;
       const y = Math.random() * SceneManager.height;
       const particle = new Particle(x, y);
+      particle.width = 1;
+      particle.height = 1;
       this.particles.push(particle);
       this.particleContainer.addChild(particle);
     }
