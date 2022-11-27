@@ -80,7 +80,10 @@ export class ParticlesScene extends Container {
     });
     this.addChild(legend);
     legend.anchor.set(0.5, 0);
-    legend.position.set(SceneManager.width / 2, 0);
+    legend.position.set(
+      SceneManager.width / 2,
+      SceneManager.height - legend.height - 10
+    );
     legend.alpha = 0;
 
     this.sortableChildren = true;
@@ -172,12 +175,13 @@ export class ParticlesScene extends Container {
         this.particles[i],
         {
           pixi: {
-            positionX: Math.random() * SceneManager.width,
-            positionY: Math.random() * SceneManager.height,
+            positionX: Math.random() * SceneManager.width * (Math.random() + 1),
+            positionY:
+              Math.random() * SceneManager.height * (Math.random() + 1),
           },
           duration: 1,
         },
-        "middle1"
+        "middle"
       );
     }
 
@@ -186,12 +190,12 @@ export class ParticlesScene extends Container {
         this.particles[i],
         {
           pixi: {
-            positionX: SceneManager.width / 2,
-            positionY: SceneManager.height / 2,
+            positionX: this.particles[i].baseX,
+            positionY: this.particles[i].baseY,
           },
-          duration: 1,
+          duration: Math.random() * 3,
         },
-        "middle2"
+        "end"
       );
     }
 
