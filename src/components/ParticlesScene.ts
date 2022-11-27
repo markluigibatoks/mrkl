@@ -37,7 +37,7 @@ export class ParticlesScene extends Container {
     background.tint = 0x000000;
     this.addChild(background);
 
-    this.particleContainer = new ParticleContainer(30000, {
+    this.particleContainer = new ParticleContainer(1500, {
       scale: true,
       position: true,
       rotation: false,
@@ -83,12 +83,10 @@ export class ParticlesScene extends Container {
   }
 
   setup() {
-    for (let i = 0; i < 30000; i++) {
+    for (let i = 0; i < 1500; i++) {
       const x = Math.random() * SceneManager.width;
       const y = Math.random() * SceneManager.height;
       const particle = new Particle(x, y);
-      particle.width = 1;
-      particle.height = 1;
       this.particles.push(particle);
       this.particleContainer.addChild(particle);
     }
