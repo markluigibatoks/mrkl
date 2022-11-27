@@ -22,13 +22,10 @@ export class ParticlesScene extends Container {
       radius: 150,
     };
 
-    this.on("pointermove", (event) => {
+    this.on("pointerdown", (event) => {
       console.log((SceneManager.app.view as HTMLCanvasElement).offsetLeft);
-      this.mouse.x =
-        event.client.x -
-        (SceneManager.app.view as HTMLCanvasElement).offsetLeft;
-      this.mouse.y =
-        event.client.y - (SceneManager.app.view as HTMLCanvasElement).offsetTop;
+      this.mouse.x = event.global.x;
+      this.mouse.y = event.global.y;
     });
     this.interactive = true;
     this.cursor = "default";
