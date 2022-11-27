@@ -3,6 +3,7 @@ import Home from "@/components/HomeView.vue";
 import Playground from "@/components/PlaygroundView.vue";
 import MatchingPair from "@/components/MatchingPairView.vue";
 import Tetris from "@/components/TetrisView.vue";
+import Particles from "@/components/ParticlesView.vue";
 import NotFound from "@/components/NotFoundView.vue";
 
 const routes = [
@@ -25,6 +26,11 @@ const routes = [
         path: "tetris",
         name: "Tetris",
         component: Tetris,
+      },
+      {
+        path: "particles",
+        name: "Particles",
+        component: Particles,
       },
     ],
   },

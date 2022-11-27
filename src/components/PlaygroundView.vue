@@ -51,6 +51,24 @@ import FooterView from "@/components/FooterView.vue";
             </a>
           </router-link>
         </li>
+        <li>
+          <router-link
+            :to="{ name: 'Particles' }"
+            custom
+            v-slot="{ href, navigate, isActive, isExactActive }"
+          >
+            <a
+              :href="href"
+              :class="[
+                isExactActive
+                  ? 'font-bold text-sky-500 underline'
+                  : 'text-black',
+              ]"
+            >
+              Particles
+            </a>
+          </router-link>
+        </li>
       </ul>
     </div>
   </main>
