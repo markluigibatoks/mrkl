@@ -5,6 +5,7 @@ import MatchingPair from "@/components/MatchingPairView.vue";
 import Tetris from "@/components/TetrisView.vue";
 import Particles from "@/components/ParticlesView.vue";
 import NotFound from "@/components/NotFoundView.vue";
+import FEMNewsHomePage from "@/components/FEMNewsHomePage.vue";
 
 const routes = [
   {
@@ -33,6 +34,11 @@ const routes = [
         component: Particles,
       },
     ],
+  },
+  {
+    path: "/femnewshomepage",
+    name: "FEMNewsHomePage",
+    component: FEMNewsHomePage,
   },
   {
     path: "/:catchAll(.*)",
