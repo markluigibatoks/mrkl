@@ -616,6 +616,13 @@ const isMenuSub2Open = ref(false);
       </div>
     </div>
   </main>
+
+  <div class="attribution">
+    Challenge by
+    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+      >Frontend Mentor</a
+    >. Coded by <a href="/">mrkl</a>.
+  </div>
 </template>
 
 <style scoped>
@@ -635,8 +642,5 @@ body {
 }
 .attribution a {
   color: hsl(228, 45%, 44%);
-  color: #fafafa;
-  color: #696969;
-  color: #141414;
 }
 </style>
