@@ -6,6 +6,7 @@ import Tetris from "@/components/TetrisView.vue";
 import Particles from "@/components/ParticlesView.vue";
 import NotFound from "@/components/NotFoundView.vue";
 import FEMNewsHomePage from "@/components/FEMNewsHomePage.vue";
+import FEMDropdown from "@/components/FEMDropdown.vue";
 
 const routes = [
   {
@@ -39,6 +40,11 @@ const routes = [
     path: "/femnewshomepage",
     name: "FEMNewsHomePage",
     component: FEMNewsHomePage,
+  },
+  {
+    path: "/femdropdown",
+    name: "FEMDropdown",
+    component: FEMDropdown,
   },
   {
     path: "/:catchAll(.*)",
