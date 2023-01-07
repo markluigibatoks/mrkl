@@ -7,6 +7,7 @@ import Particles from "@/components/ParticlesView.vue";
 import NotFound from "@/components/NotFoundView.vue";
 import FEMNewsHomePage from "@/components/FEMNewsHomePage.vue";
 import FEMDropdown from "@/components/FEMDropdown.vue";
+import FEMNotifications from "@/components/FEMNotifications.vue";
 
 const routes = [
   {
@@ -45,6 +46,11 @@ const routes = [
     path: "/femdropdown",
     name: "FEMDropdown",
     component: FEMDropdown,
+  },
+  {
+    path: "/femnotifications",
+    name: "FEMNotifications",
+    component: FEMNotifications,
   },
   {
     path: "/:catchAll(.*)",
