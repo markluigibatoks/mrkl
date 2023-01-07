@@ -207,6 +207,13 @@ import { getImageURL } from "../composables/useStaticURL";
       </section>
     </div>
   </div>
+
+  <div class="attribution">
+    Challenge by
+    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+      >Frontend Mentor</a
+    >. Coded by <a href="/">mrkl</a>.
+  </div>
 </template>
 
 <style scoped>
