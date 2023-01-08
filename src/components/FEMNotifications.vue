@@ -232,15 +232,5 @@ import { getImageURL } from "../composables/useStaticURL";
 }
 .attribution a {
   color: hsl(228, 45%, 44%);
-
-  color: #f65351;
-  color: #0a317b;
-  color: #ffffff;
-  color: #f7fafd;
-  color: #e5effa;
-  color: #dde7ee;
-  color: #939dae;
-  color: #5e6778;
-  color: #1c202b;
 }
 </style>
