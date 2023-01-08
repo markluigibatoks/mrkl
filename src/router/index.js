@@ -8,6 +8,7 @@ import NotFound from "@/components/NotFoundView.vue";
 import FEMNewsHomePage from "@/components/FEMNewsHomePage.vue";
 import FEMDropdown from "@/components/FEMDropdown.vue";
 import FEMNotifications from "@/components/FEMNotifications.vue";
+import FEMAdviceSlip from "@/components/FEMAdviceSlip.vue";
 
 const routes = [
   {
@@ -51,6 +52,11 @@ const routes = [
     path: "/femnotifications",
     name: "FEMNotifications",
     component: FEMNotifications,
+  },
+  {
+    path: "/femadviceslip",
+    name: "FEMAdviceSlip",
+    component: FEMAdviceSlip,
   },
   {
     path: "/:catchAll(.*)",
