@@ -9,6 +9,7 @@ import FEMNewsHomePage from "@/components/FEMNewsHomePage.vue";
 import FEMDropdown from "@/components/FEMDropdown.vue";
 import FEMNotifications from "@/components/FEMNotifications.vue";
 import FEMAdviceSlip from "@/components/FEMAdviceSlip.vue";
+import FEMRESTCountriesAPI from "@/components/FEMRESTCountriesAPI.vue";
 
 const routes = [
   {
@@ -57,6 +58,11 @@ const routes = [
     path: "/femadviceslip",
     name: "FEMAdviceSlip",
     component: FEMAdviceSlip,
+  },
+  {
+    path: "/femrestcountriesapi",
+    name: "FEMRESTCountriesAPI",
+    component: FEMRESTCountriesAPI,
   },
   {
     path: "/:catchAll(.*)",
