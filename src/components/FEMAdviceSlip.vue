@@ -1,23 +1,20 @@
 <script setup>
-import axios from "axios";
-import { ref, onMounted } from "vue";
-
-const slip = ref({});
+const slip = ref({})
 
 onMounted(async () => {
-  await fetchSlip();
-});
+  await fetchSlip()
+})
 
-async function fetchSlip() {
+async function fetchSlip () {
   try {
     const response = await axios.get(
       `https://api.adviceslip.com/advice/${Math.random() * 223 + 1}`
-    );
+    )
     if (response.status === 200) {
-      slip.value = response.data.slip;
+      slip.value = response.data.slip
     }
   } catch {
-    console.log("Error fetching the Advice Slip");
+    console.log("Error fetching the Advice Slip")
   }
 }
 </script>
@@ -28,9 +25,7 @@ async function fetchSlip() {
       <div
         class="relative max-w-[514px] rounded-xl bg-[#323a49] p-12 text-center"
       >
-        <span class="block text-sm uppercase tracking-wide text-[#52ffa8]"
-          >Advice #{{ slip.id }}</span
-        >
+        <span class="block text-sm uppercase tracking-wide text-[#52ffa8]">Advice #{{ slip.id }}</span>
 
         "{{ slip.advice }}"
 
@@ -41,11 +36,29 @@ async function fetchSlip() {
             height="16"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g fill="none" fill-rule="evenodd">
-              <path fill="#4F5D74" d="M0 8h196v1H0zM248 8h196v1H248z" />
-              <g transform="translate(212)" fill="#CEE3E9">
-                <rect width="6" height="16" rx="3" />
-                <rect x="14" width="6" height="16" rx="3" />
+            <g
+              fill="none"
+              fill-rule="evenodd"
+            >
+              <path
+                fill="#4F5D74"
+                d="M0 8h196v1H0zM248 8h196v1H248z"
+              />
+              <g
+                transform="translate(212)"
+                fill="#CEE3E9"
+              >
+                <rect
+                  width="6"
+                  height="16"
+                  rx="3"
+                />
+                <rect
+                  x="14"
+                  width="6"
+                  height="16"
+                  rx="3"
+                />
               </g>
             </g>
           </svg>
@@ -55,7 +68,11 @@ async function fetchSlip() {
           class="absolute top-[length:calc(100%-32px)] left-1/2 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-full bg-[#52ffa8] hover:shadow-[0px_0px_24px_#52ffa8]"
           @click="fetchSlip"
         >
-          <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            width="24"
+            height="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M20 0H4a4.005 4.005 0 0 0-4 4v16a4.005 4.005 0 0 0 4 4h16a4.005 4.005 0 0 0 4-4V4a4.005 4.005 0 0 0-4-4ZM7.5 18a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm4.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm4.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"
               fill="#202733"
@@ -66,9 +83,10 @@ async function fetchSlip() {
     </div>
     <div class="attribution">
       Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-        >Frontend Mentor</a
-      >. Coded by <a href="/">mrkl</a>.
+      <a
+        href="https://www.frontendmentor.io?ref=challenge"
+        target="_blank"
+      >Frontend Mentor</a>. Coded by <a href="/">mrkl</a>.
     </div>
   </div>
 </template>

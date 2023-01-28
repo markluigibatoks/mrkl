@@ -1,11 +1,9 @@
 <script setup>
-import { getImageURL } from "../composables/useStaticURL";
-import { ref } from "vue";
 
-const isMobileNavOpen = ref(false);
+const isMobileNavOpen = ref(false)
 
-const isMenuSub1Open = ref(false);
-const isMenuSub2Open = ref(false);
+const isMenuSub1Open = ref(false)
+const isMenuSub2Open = ref(false)
 </script>
 
 <template>
@@ -14,7 +12,10 @@ const isMenuSub2Open = ref(false);
       <div class="content">
         <div class="flex items-center justify-between">
           <figure>
-            <img :src="getImageURL('femdropdown/logo.svg')" alt="snap logo" />
+            <img
+              :src="getImageURL('femdropdown/logo.svg')"
+              alt="snap logo"
+            >
           </figure>
 
           <button @click="isMobileNavOpen = !isMobileNavOpen">
@@ -22,7 +23,7 @@ const isMenuSub2Open = ref(false);
               <img
                 :src="getImageURL('femdropdown/icon-menu.svg')"
                 alt="icon-menu"
-              />
+              >
             </figure>
           </button>
         </div>
@@ -54,11 +55,18 @@ const isMenuSub2Open = ref(false);
           >
             <div class="content relative px-5 pt-20 pb-5">
               <button
-                @click="isMobileNavOpen = !isMobileNavOpen"
                 class="absolute top-5 right-5"
+                @click="isMobileNavOpen = !isMobileNavOpen"
               >
-                <svg width="26" height="26" xmlns="http://www.w3.org/2000/svg">
-                  <g fill="#151515" fill-rule="evenodd">
+                <svg
+                  width="26"
+                  height="26"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g
+                    fill="#151515"
+                    fill-rule="evenodd"
+                  >
                     <path d="m2.393.98 22.628 22.628-1.414 1.414L.979 2.395z" />
                     <path
                       d="M.98 23.607 23.609.979l1.414 1.414L2.395 25.021z"
@@ -75,8 +83,8 @@ const isMenuSub2Open = ref(false);
                       Features
                     </button>
                     <button
-                      @click="isMenuSub1Open = !isMenuSub1Open"
                       class="p-3"
+                      @click="isMenuSub1Open = !isMenuSub1Open"
                     >
                       <i v-if="isMenuSub1Open">
                         <svg
@@ -92,7 +100,7 @@ const isMenuSub2Open = ref(false);
                           />
                         </svg>
                       </i>
-                      <i v-else="isMenuSub1Open">
+                      <i v-else>
                         <svg
                           width="10"
                           height="6"
@@ -199,8 +207,8 @@ const isMenuSub2Open = ref(false);
                       Company
                     </button>
                     <button
-                      @click="isMenuSub2Open = !isMenuSub2Open"
                       class="p-3"
+                      @click="isMenuSub2Open = !isMenuSub2Open"
                     >
                       <i v-if="isMenuSub2Open">
                         <svg
@@ -216,7 +224,7 @@ const isMenuSub2Open = ref(false);
                           />
                         </svg>
                       </i>
-                      <i v-else="isMenuSub2Open">
+                      <i v-else>
                         <svg
                           width="10"
                           height="6"
@@ -302,7 +310,10 @@ const isMenuSub2Open = ref(false);
     <div class="wrapper">
       <div class="content flex items-center">
         <figure class="mr-10">
-          <img :src="getImageURL('femdropdown/logo.svg')" alt="snap logo" />
+          <img
+            :src="getImageURL('femdropdown/logo.svg')"
+            alt="snap logo"
+          >
         </figure>
 
         <nav class="w-full">
@@ -317,8 +328,8 @@ const isMenuSub2Open = ref(false);
                       Features
                     </button>
                     <button
-                      @click="isMenuSub1Open = !isMenuSub1Open"
                       class="p-3 hover:text-[#141414]"
+                      @click="isMenuSub1Open = !isMenuSub1Open"
                     >
                       <i v-if="isMenuSub1Open">
                         <svg
@@ -334,7 +345,7 @@ const isMenuSub2Open = ref(false);
                           />
                         </svg>
                       </i>
-                      <i v-else="isMenuSub1Open">
+                      <i v-else>
                         <svg
                           width="10"
                           height="6"
@@ -441,8 +452,8 @@ const isMenuSub2Open = ref(false);
                       Company
                     </button>
                     <button
-                      @click="isMenuSub2Open = !isMenuSub2Open"
                       class="p-3"
+                      @click="isMenuSub2Open = !isMenuSub2Open"
                     >
                       <i v-if="isMenuSub2Open">
                         <svg
@@ -458,7 +469,7 @@ const isMenuSub2Open = ref(false);
                           />
                         </svg>
                       </i>
-                      <i v-else="isMenuSub2Open">
+                      <i v-else>
                         <svg
                           width="10"
                           height="6"
@@ -553,13 +564,13 @@ const isMenuSub2Open = ref(false);
               class="m-auto lg:hidden"
               :src="getImageURL('femdropdown/image-hero-mobile.png')"
               alt="make remote work"
-            />
+            >
 
             <img
               class="m-auto hidden lg:block"
               :src="getImageURL('femdropdown/image-hero-desktop.png')"
               alt="make remote work"
-            />
+            >
           </figure>
         </div>
         <div
@@ -591,25 +602,25 @@ const isMenuSub2Open = ref(false);
               <img
                 :src="getImageURL('femdropdown/client-databiz.svg')"
                 alt="databiz"
-              />
+              >
             </figure>
             <figure>
               <img
                 :src="getImageURL('femdropdown/client-audiophile.svg')"
                 alt="audiophile"
-              />
+              >
             </figure>
             <figure>
               <img
                 :src="getImageURL('femdropdown/client-meet.svg')"
                 alt="meet"
-              />
+              >
             </figure>
             <figure>
               <img
                 :src="getImageURL('femdropdown/client-maker.svg')"
                 alt="maker"
-              />
+              >
             </figure>
           </div>
         </div>
@@ -619,9 +630,10 @@ const isMenuSub2Open = ref(false);
 
   <div class="attribution">
     Challenge by
-    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-      >Frontend Mentor</a
-    >. Coded by <a href="/">mrkl</a>.
+    <a
+      href="https://www.frontendmentor.io?ref=challenge"
+      target="_blank"
+    >Frontend Mentor</a>. Coded by <a href="/">mrkl</a>.
   </div>
 </template>
 

@@ -1,15 +1,16 @@
-<script setup>
-import { getImageURL } from "../composables/useStaticURL";
-</script>
-
 <template>
   <div class="px-4 py-5">
     <div class="mx-auto max-w-[1440px]">
       <header class="flex gap-3">
-        <h2 class="text-lg font-[700] text-[#1c202b]">Notifications</h2>
+        <h2 class="text-lg font-[700] text-[#1c202b]">
+          Notifications
+        </h2>
         <span class="rounded-md bg-[#0a317b] px-3 py-px text-white">3</span>
         <div class="flex-auto"></div>
-        <a href="#" class="text-sm">Mark all as read</a>
+        <a
+          href="#"
+          class="text-sm"
+        >Mark all as read</a>
       </header>
       <section class="mt-6">
         <ul>
@@ -18,21 +19,21 @@ import { getImageURL } from "../composables/useStaticURL";
               <figure class="h-10 min-h-[40px] w-10 min-w-[40px]">
                 <img
                   :src="getImageURL('femnotifications/avatar-mark-webber.webp')"
-                />
+                >
               </figure>
               <div>
                 <a
                   href="#"
                   class="mr-0.5 font-[700] text-[#1c202b] hover:text-[#0a317b]"
-                  >Mark Webber</a
-                >
+                >Mark Webber</a>
                 reacted to your recent post
-                <a href="#" class="ml-0.5 font-[700] hover:text-[#0a317b]"
-                  >My first tournament today!
+                <a
+                  href="#"
+                  class="ml-0.5 font-[700] hover:text-[#0a317b]"
+                >My first tournament today!
                   <span
                     class="ml-1 inline-block h-2 w-2 rounded-full bg-[#f65351] align-middle"
-                  ></span
-                ></a>
+                  ></span></a>
 
                 <span class="block text-sm text-[#939dae]">1m ago</span>
               </div>
@@ -44,14 +45,13 @@ import { getImageURL } from "../composables/useStaticURL";
               <figure class="h-10 min-h-[40px] w-10 min-w-[40px]">
                 <img
                   :src="getImageURL('femnotifications/avatar-angela-gray.webp')"
-                />
+                >
               </figure>
               <div>
                 <a
                   href="#"
                   class="mr-0.5 font-[700] text-[#1c202b] hover:text-[#0a317b]"
-                  >Angela Gray</a
-                >
+                >Angela Gray</a>
                 followed you
                 <span
                   class="ml-1 inline-block h-2 w-2 rounded-full bg-[#f65351] align-middle"
@@ -69,21 +69,21 @@ import { getImageURL } from "../composables/useStaticURL";
                   :src="
                     getImageURL('femnotifications/avatar-jacob-thompson.webp')
                   "
-                />
+                >
               </figure>
               <div>
                 <a
                   href="#"
                   class="mr-0.5 font-[700] text-[#1c202b] hover:text-[#0a317b]"
-                  >Jacob Thompson</a
-                >
+                >Jacob Thompson</a>
                 has joined your group
-                <a href="#" class="ml-0.5 font-[700] hover:text-[#0a317b]"
-                  >Chess Club
+                <a
+                  href="#"
+                  class="ml-0.5 font-[700] hover:text-[#0a317b]"
+                >Chess Club
                   <span
                     class="ml-1 inline-block h-2 w-2 rounded-full bg-[#f65351] align-middle"
-                  ></span
-                ></a>
+                  ></span></a>
 
                 <span class="block text-sm text-[#939dae]">1 day ago</span>
               </div>
@@ -97,14 +97,13 @@ import { getImageURL } from "../composables/useStaticURL";
                   :src="
                     getImageURL('femnotifications/avatar-rizky-hasanuddin.webp')
                   "
-                />
+                >
               </figure>
               <div>
                 <a
                   href="#"
                   class="mr-0.5 font-[700] text-[#1c202b] hover:text-[#0a317b]"
-                  >Rizky Hasanuddin</a
-                >
+                >Rizky Hasanuddin</a>
                 sent you a private message
                 <span class="block text-sm text-[#939dae]">1 day ago</span>
 
@@ -129,14 +128,13 @@ import { getImageURL } from "../composables/useStaticURL";
                   :src="
                     getImageURL('femnotifications/avatar-kimberly-smith.webp')
                   "
-                />
+                >
               </figure>
               <div>
                 <a
                   href="#"
                   class="mr-0.5 font-[700] text-[#1c202b] hover:text-[#0a317b]"
-                  >Kimberly Smith</a
-                >
+                >Kimberly Smith</a>
                 commented on your picture
                 <span class="block text-sm text-[#939dae]">1 week ago</span>
               </div>
@@ -148,7 +146,7 @@ import { getImageURL } from "../composables/useStaticURL";
                 <figure class="h-10 min-h-[40px] w-10 min-w-[40px]">
                   <img
                     :src="getImageURL('femnotifications/image-chess.webp')"
-                  />
+                  >
                 </figure>
               </a>
             </div>
@@ -161,18 +159,19 @@ import { getImageURL } from "../composables/useStaticURL";
                   :src="
                     getImageURL('femnotifications/avatar-nathan-peterson.webp')
                   "
-                />
+                >
               </figure>
               <div>
                 <a
                   href="#"
                   class="mr-0.5 font-[700] text-[#1c202b] hover:text-[#0a317b]"
-                  >Nathan Peterson</a
-                >
+                >Nathan Peterson</a>
                 reacted to your recent post
 
-                <a href="#" class="ml-0.5 font-[700] hover:text-[#0a317b]"
-                  >5 end-game strategies to increase your win rate
+                <a
+                  href="#"
+                  class="ml-0.5 font-[700] hover:text-[#0a317b]"
+                >5 end-game strategies to increase your win rate
                 </a>
 
                 <span class="block text-sm text-[#939dae]">2 weeks ago</span>
@@ -185,20 +184,18 @@ import { getImageURL } from "../composables/useStaticURL";
               <figure class="h-10 min-h-[40px] w-10 min-w-[40px]">
                 <img
                   :src="getImageURL('femnotifications/avatar-anna-kim.webp')"
-                />
+                >
               </figure>
               <div>
                 <a
                   href="#"
                   class="mr-0.5 font-[700] text-[#1c202b] hover:text-[#0a317b]"
-                  >Anna Kim</a
-                >
+                >Anna Kim</a>
                 left the group
                 <a
                   href="#"
                   class="ml-0.5 font-[700] text-[#0a317b] hover:text-[#0a317b]"
-                  >Chess Club</a
-                >
+                >Chess Club</a>
                 <span class="block text-sm text-[#939dae]">2 weeks ago</span>
               </div>
             </div>
@@ -210,9 +207,10 @@ import { getImageURL } from "../composables/useStaticURL";
 
   <div class="attribution">
     Challenge by
-    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-      >Frontend Mentor</a
-    >. Coded by <a href="/">mrkl</a>.
+    <a
+      href="https://www.frontendmentor.io?ref=challenge"
+      target="_blank"
+    >Frontend Mentor</a>. Coded by <a href="/">mrkl</a>.
   </div>
 </template>
 

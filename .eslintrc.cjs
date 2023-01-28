@@ -1,6 +1,4 @@
 /* eslint-env node */
-require("@rushstack/eslint-patch/modern-module-resolution");
-
 module.exports = {
   root: true,
   extends: [
@@ -8,19 +6,24 @@ module.exports = {
     "plugin:vue/vue3-essential",
     "plugin:vue/vue3-recommended",
     "plugin:vue/vue3-strongly-recommended",
-    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended"
   ],
   env: {
     "vue/setup-compiler-macros": true,
     browser: true,
     es2021: true,
-    node: true,
+    node: true
   },
+  parser: "vue-eslint-parser",
+  plugins: ["@typescript-eslint"],
   parserOptions: {
     ecmaVersion: 13,
     sourceType: "module",
+    parser: "@typescript-eslint/parser"
   },
   rules: {
+    "@typescript-eslint/no-explicit-any": ["off"],
     "space-in-parens": ["error", "never"],
     "no-trailing-spaces": "error",
     "array-bracket-spacing": ["error", "never"],
@@ -37,8 +40,8 @@ module.exports = {
       "error",
       {
         before: false,
-        after: true,
-      },
+        after: true
+      }
     ],
     "default-case": "error",
     indent: [
@@ -46,8 +49,8 @@ module.exports = {
       2,
       {
         SwitchCase: 1,
-        ignoredNodes: ["TemplateLiteral"],
-      },
+        ignoredNodes: ["TemplateLiteral"]
+      }
     ],
     "no-alert": "off",
     "no-await-in-loop": "error",
@@ -61,8 +64,8 @@ module.exports = {
     "no-multiple-empty-lines": [
       2,
       {
-        max: 1,
-      },
+        max: 1
+      }
     ],
     "no-new": "off",
     "no-prototype-builtins": "off",
@@ -83,8 +86,8 @@ module.exports = {
       "error",
       {
         singleline: "never",
-        multiline: "always",
-      },
+        multiline: "always"
+      }
     ],
     "vue/html-end-tags": "error",
     "vue/html-indent": [
@@ -95,8 +98,8 @@ module.exports = {
         baseIndent: 1,
         closeBracket: 0,
         alignAttributesVertically: true,
-        ignores: [],
-      },
+        ignores: []
+      }
     ],
     "vue/html-self-closing": [
       "error",
@@ -104,34 +107,34 @@ module.exports = {
         html: {
           void: "never",
           normal: "never",
-          component: "always",
+          component: "always"
         },
         svg: "always",
-        math: "always",
-      },
+        math: "always"
+      }
     ],
     "vue/match-component-file-name": [
       "error",
       {
         extensions: ["vue"],
-        shouldMatchCase: false,
-      },
+        shouldMatchCase: false
+      }
     ],
     "vue/max-attributes-per-line": [
       "error",
       {
-        singleline: 1,
-      },
+        singleline: 1
+      }
     ],
     "vue/no-unused-properties": [
       "error",
       {
-        groups: ["props", "data", "computed", "methods"],
-      },
+        groups: ["props", "data", "computed", "methods"]
+      }
     ],
     "vue/no-v-html": "off",
     "vue/this-in-template": ["error", "never"],
     "vue/v-bind-style": ["error", "shorthand"],
-    "vue/v-on-style": ["error", "shorthand"],
-  },
-};
+    "vue/v-on-style": ["error", "shorthand"]
+  }
+}

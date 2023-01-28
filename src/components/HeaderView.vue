@@ -1,64 +1,62 @@
 <script setup>
-import IconCode from "@/components/icons/IconCode.vue";
-import { gsap } from "gsap";
-import { ref, onMounted } from "vue";
+import { gsap } from "gsap"
 
-const line1 = ref(null);
-const line2 = ref(null);
-const line3 = ref(null);
-const nav = ref(null);
+const line1 = ref(null)
+const line2 = ref(null)
+const line3 = ref(null)
+const nav = ref(null)
 
-const open = ref(false);
+const open = ref(false)
 
-const mainTimeline = gsap.timeline();
-const duration = ref(0.5);
+const mainTimeline = gsap.timeline()
+const duration = ref(0.5)
 
 onMounted(() => {
   gsap.set(nav.value, {
-    yPercent: -100,
-  });
+    yPercent: -100
+  })
 
   gsap.set(line1.value, {
-    y: -8,
-  });
+    y: -8
+  })
 
   gsap.set(line3.value, {
-    y: 8,
-  });
+    y: 8
+  })
 
-  mainTimeline.add(hamburgerAnimation(duration.value), "start");
-  mainTimeline.add(navAnimation(duration.value), "start");
-  mainTimeline.pause(0);
-});
+  mainTimeline.add(hamburgerAnimation(duration.value), "start")
+  mainTimeline.add(navAnimation(duration.value), "start")
+  mainTimeline.pause(0)
+})
 
-function toggleMenu() {
-  open.value ? mainTimeline.reverse(duration.value) : mainTimeline.play(0);
+function toggleMenu () {
+  open.value ? mainTimeline.reverse(duration.value) : mainTimeline.play(0)
 }
 
-function hamburgerAnimation(duration) {
-  const timeline = gsap.timeline();
+function hamburgerAnimation (duration) {
+  const timeline = gsap.timeline()
 
   timeline.to(
     line1.value,
     {
       y: 0,
-      duration: duration / 2,
+      duration: duration / 2
     },
     "start"
-  );
+  )
 
   timeline.to(
     line3.value,
     {
       y: 0,
-      duration: duration / 2,
+      duration: duration / 2
     },
     "start"
-  );
+  )
 
   timeline.set(line2.value, {
-    opacity: 0,
-  });
+    opacity: 0
+  })
 
   timeline.to(
     line1.value,
@@ -66,10 +64,10 @@ function hamburgerAnimation(duration) {
       rotate: 45,
       x: 0,
       y: 0,
-      duration: duration / 2,
+      duration: duration / 2
     },
     "end"
-  );
+  )
 
   timeline.to(
     line3.value,
@@ -77,27 +75,27 @@ function hamburgerAnimation(duration) {
       rotate: -45,
       x: 0,
       y: 0,
-      duration: duration / 2,
+      duration: duration / 2
     },
     "end"
-  );
+  )
 
-  return timeline;
+  return timeline
 }
 
-function navAnimation(duration) {
-  const timeline = gsap.timeline();
+function navAnimation (duration) {
+  const timeline = gsap.timeline()
 
   timeline.set(nav.value, {
-    yPercent: -100,
-  });
+    yPercent: -100
+  })
 
   timeline.to(nav.value, {
     yPercent: 0,
-    duration,
-  });
+    duration
+  })
 
-  return timeline;
+  return timeline
 }
 </script>
 
@@ -120,8 +118,8 @@ function navAnimation(duration) {
           Say Hello
         </a>
         <div
-          @click="toggleMenu(), (open = !open)"
           class="relative h-[30px] w-[30px] cursor-pointer"
+          @click="toggleMenu(), (open = !open)"
         >
           <i
             ref="line1"
@@ -138,13 +136,16 @@ function navAnimation(duration) {
         </div>
       </div>
     </div>
-    <nav ref="nav" class="absolute z-10 block w-full">
+    <nav
+      ref="nav"
+      class="absolute z-10 block w-full"
+    >
       <ul>
         <li>
           <router-link
+            v-slot="{ href, navigate, isActive, isExactActive }"
             :to="{ name: 'Home' }"
             custom
-            v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <a
               :href="href"
@@ -161,9 +162,9 @@ function navAnimation(duration) {
         </li>
         <li>
           <router-link
+            v-slot="{ href, navigate, isActive, isExactActive }"
             :to="{ name: 'Playground' }"
             custom
-            v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <a
               :href="href"
@@ -192,9 +193,9 @@ function navAnimation(duration) {
         "
         >
           <router-link
+            v-slot="{ href, navigate, isActive, isExactActive }"
             :to="{ name: 'Home' }"
             custom
-            v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <a
               :href="href"
@@ -210,9 +211,9 @@ function navAnimation(duration) {
         "
         >
           <router-link
+            v-slot="{ href, navigate, isActive, isExactActive }"
             :to="{ name: 'Playground' }"
             custom
-            v-slot="{ href, navigate, isActive, isExactActive }"
           >
             <a
               :href="href"
