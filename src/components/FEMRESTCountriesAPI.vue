@@ -1,18 +1,8 @@
 <script setup>
 const searchCountryNameInput = ref("")
-const filterByRegion = ref("")
+const searchByRegion = ref("")
 
-const url = computed(() => {
-  if (searchCountryNameInput.value !== "") {
-    return baseURL + `name/${searchCountryNameInput.value}`
-  }
-
-  if (filterByRegion.value !== "") {
-    return baseURL + `region/${filterByRegion.value}`
-  }
-
-  return `https://restcountries.com/v3.1/all`
-})
+const url = ref('https://restcountries.com/v3.1/all')
 
 const countriesRaw = (await axios.get('https://restcountries.com/v3.1/all')).data
 const countryNames = computed(() => {
@@ -32,6 +22,23 @@ onMounted(() => {
     "dark:bg-[#2b3945]"
   )
 })
+
+function searchCountryByName () {
+  if (searchCountryNameInput.value === "") {
+    url.value = 'https://restcountries.com/v3.1/all'
+  } else {
+    url.value = baseURL + `name/${searchCountryNameInput.value}`
+  }
+  searchCountryNameInput.value = ''
+}
+
+function searchCountryByRegion () {
+  if (searchByRegion.value !== "") {
+    url.value = baseURL + `region/${searchByRegion.value}`
+    searchByRegion.value = ''
+  }
+}
+
 </script>
 <template>
   <header class="bg-white px-5 py-10 drop-shadow-md dark:bg-[#202c37] sm:py-5">
@@ -52,22 +59,34 @@ onMounted(() => {
   <div class="px-5">
     <div class="wrapper">
       <div class="flex flex-col justify-between lg:flex-row lg:items-center">
-        <base-search-input
-          v-model="searchCountryNameInput"
-          name="countries"
-          :options="countryNames"
-          placeholder="Search for a country..."
-          class="my-5 min-h-[60px] flex-auto rounded-lg pl-8 dark:bg-[#202c37] dark:text-[#111517]"
+        <form
+          class="w-full"
+          @submit.prevent="searchCountryByName"
         >
-          <template #prepend>
-            <icon-search class="-ml-1 mr-2 h-6 w-10 pr-1 dark:text-[#fafafa]" />
-          </template>
-        </base-search-input>
+          <base-search-input
+            v-model="searchCountryNameInput"
+            name="countries"
+            :options="countryNames"
+            placeholder="Search for a country..."
+            class="my-5 min-h-[60px] flex-auto rounded-lg pl-8 dark:bg-[#202c37] dark:text-[#111517]"
+          >
+            <template #prepend>
+              <base-button
+                icon
+                size="sm"
+                type="submit"
+              >
+                <icon-search class="text-lg dark:text-[#fafafa]" />
+              </base-button>
+            </template>
+          </base-search-input>
+        </form>
 
         <select
           ref="target"
-          v-model="filterByRegion"
+          v-model="searchByRegion"
           class="dark:text-white select my-5 min-h-[60px] max-w-[280px] flex-auto rounded-lg !pl-8 leading-[60px] dark:bg-[#202c37] w-full appearance-none rounded-lg bg-white bg-clip-padding bg-no-repeat py-1.5 pl-3 pr-10 shadow shadow-lg transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+          @change="searchCountryByRegion"
         >
           <option
             value=""
@@ -75,7 +94,7 @@ onMounted(() => {
             default
             disabled
           >
-            Filter by Region
+            Search by Region
           </option>
           <option
             v-for="option in countryRegions"
@@ -136,18 +155,29 @@ onMounted(() => {
       </base-list>
     </div>
   </div>
+
+  <div class="attribution">
+    Challenge by
+    <a
+      href="https://www.frontendmentor.io?ref=challenge"
+      target="_blank"
+    >Frontend Mentor</a>. Coded by <a href="/">mrkl</a>.
+  </div>
 </template>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
 
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
 * {
   font-size: 14px;
-  /* color: #2b3945;
-  color: #202c37;
-  color: #858585;
-  color: #ffffff;
-  color: #111517; */
 }
 
 .wrapper {
