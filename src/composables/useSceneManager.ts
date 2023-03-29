@@ -1,4 +1,4 @@
-import { Application, Container } from "pixi.js";
+import { Application, Container } from "pixi.js"
 
 interface SceneOptions {
   canvasHolder?: any;
@@ -11,99 +11,69 @@ interface SceneOptions {
   antialias?: boolean;
   maxFPS?: number;
   minFPS?: number;
-  size?: "cover" | "contain";
 }
 
 export class SceneManager {
-  static app: Application;
+  static app: Application
 
-  static width = 0;
-  static height = 0;
+  public static get width (): number {
+    return Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
+  }
 
-  static size = "";
+  public static get height (): number {
+    return Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+  }
 
-  private static currentScene: Container;
+  private static currentScene: Container
 
-  static initialize({
+  static initialize ({
     canvasHolder = document.querySelector("#app"),
-    width = 960,
-    height = 540,
     resolution = window.devicePixelRatio || 1,
     autoDensity = true,
     backgroundColor = 0x000000,
     backgroundAlpha = 1,
     antialias = true,
     maxFPS = 60,
-    minFPS = 60,
-    size = "cover",
+    minFPS = 60
   }: SceneOptions) {
-    SceneManager.width = width;
-    SceneManager.height = height;
 
-    SceneManager.size = size;
+    console.log(canvasHolder)
 
     SceneManager.app = new Application({
-      width,
-      height,
       resolution,
+      resizeTo: window,
       autoDensity,
       backgroundColor,
       backgroundAlpha,
-      antialias,
-    });
+      antialias
+    })
 
-    SceneManager.app.ticker.maxFPS = maxFPS;
-    SceneManager.app.ticker.minFPS = minFPS;
+    SceneManager.app.ticker.maxFPS = maxFPS
+    SceneManager.app.ticker.minFPS = minFPS
 
-    canvasHolder.appendChild(SceneManager.app.view);
+    canvasHolder.appendChild(SceneManager.app.view)
 
-    window.addEventListener("resize", SceneManager.resize);
+    window.addEventListener("resize", SceneManager.resize)
 
-    SceneManager.resize();
+    SceneManager.resize()
   }
 
-  static resize(): void {
-    const screenWidth = Math.max(
-      document.documentElement.clientWidth,
-      window.innerWidth || 0
-    );
-    const screenHeight = Math.max(
-      document.documentElement.clientHeight,
-      window.innerHeight || 0
-    );
-
-    let enlargedWidth = screenWidth;
-    let enlargedHeight = screenHeight;
-
-    if ((screenWidth * 9) / 16 > screenHeight) {
-      enlargedWidth = (screenHeight * 16) / 9;
-    } else {
-      enlargedHeight = (screenWidth * 9) / 16;
-    }
-
-    if (screenWidth > 960 && screenHeight > 540) {
-      enlargedWidth =
-        SceneManager.size === "cover" ? screenWidth : SceneManager.width;
-      enlargedHeight =
-        SceneManager.size === "cover"
-          ? (screenWidth * 9) / 16
-          : SceneManager.height;
-    }
-
+  static resize (): void {
     if (SceneManager.app.view.style) {
-      const view = SceneManager.app.view as HTMLCanvasElement;
-      view.style.width = `${enlargedWidth}px`;
-      view.style.height = `${enlargedHeight}px`;
+
+      const view = SceneManager.app.view as HTMLCanvasElement
+      view.style.width = `${SceneManager.width}px`
+      view.style.height = `${SceneManager.height}px`
     }
   }
 
-  static changeScene(container: Container) {
+  static changeScene (container: Container) {
     if (SceneManager.currentScene) {
-      SceneManager.app.stage.removeChild(SceneManager.currentScene);
-      SceneManager.currentScene.destroy();
+      SceneManager.app.stage.removeChild(SceneManager.currentScene)
+      SceneManager.currentScene.destroy()
     }
 
-    SceneManager.currentScene = container;
-    SceneManager.app.stage.addChild(SceneManager.currentScene);
+    SceneManager.currentScene = container
+    SceneManager.app.stage.addChild(SceneManager.currentScene)
   }
 }

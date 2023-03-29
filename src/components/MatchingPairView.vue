@@ -1,45 +1,45 @@
 <script setup>
-import { onMounted, ref } from "vue";
-import { AssetManager } from "@/composables/useAssetManager";
-import { SceneManager } from "@/composables/useSceneManager";
-import { LoadingView } from "@/components/LoadingViewScene";
-import generateManifest from "@/composables/useGenerateManifest";
-import { MatchingPairLobby } from "./MatchingPairLobbyScene";
+import { onMounted, ref } from "vue"
+import { AssetManager } from "@/composables/useAssetManager"
+import { SceneManager } from "@/composables/useSceneManager"
+import { LoadingView } from "@/components/LoadingViewScene"
+import generateManifest from "@/composables/useGenerateManifest"
+import { MatchingPairLobby } from "./MatchingPairLobbyScene"
 
-const canvas = ref(null);
+const canvas = ref(null)
 
-let loadingView = null;
-let matchingPairLobby = null;
+let loadingView = null
+let matchingPairLobby = null
 
 onMounted(async () => {
   SceneManager.initialize({
     canvasHolder: canvas.value,
-    width: 960,
-    height: 540,
     backgroundColor: 0xf3f3f3,
     maxFPS: 0,
-    minFPS: 10,
-    size: "contain",
-  });
+    minFPS: 10
+  })
 
   await AssetManager.initialize(
     generateManifest(["matchingpair", "sounds", "fonts"])
-  );
+  )
 
-  loadingView = new LoadingView();
+  loadingView = new LoadingView()
 
-  SceneManager.changeScene(loadingView);
+  SceneManager.changeScene(loadingView)
 
-  await AssetManager.preload((progress) => {
-    loadingView.updateProgress(progress);
-  });
+  await AssetManager.preload(progress => {
+    loadingView.updateProgress(progress)
+  })
 
-  matchingPairLobby = new MatchingPairLobby();
+  matchingPairLobby = new MatchingPairLobby()
 
-  SceneManager.changeScene(matchingPairLobby);
-});
+  SceneManager.changeScene(matchingPairLobby)
+})
 </script>
 
 <template>
-  <div ref="canvas" class="flex items-center justify-center"></div>
+  <div
+    ref="canvas"
+    class="flex items-center justify-center"
+  ></div>
 </template>
