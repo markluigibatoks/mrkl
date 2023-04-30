@@ -1,24 +1,25 @@
-import { Container, Text } from "pixi.js";
-import { SceneManager } from "@/composables/useSceneManager";
+import { Container, Text } from "pixi.js"
+import { SceneManager } from "@/composables/useSceneManager"
 
 export class TextScene extends Container {
-  constructor() {
-    super();
+  constructor () {
+    super()
 
-    const name = new Text("mrkl", {
-      fontWeight: "bold",
-      fontSize: 250,
+    const name = new Text("m r k l", {
+      fontWeight: "normal",
+      fontSize: 120,
       fontFamily: "Arial",
       fill: "#ffffff",
-      align: "center",
-    });
+      align: "center"
+    })
 
-    name.anchor.set(0.5);
-    name.position.x = SceneManager.width / 2;
-    name.position.y = SceneManager.height / 2;
+    name.anchor.set(0.5)
 
-    this.addChild(name);
+    name.position.x = SceneManager.width / 2
+    name.position.y = SceneManager.height / 2
 
-    this.sortableChildren = true;
+    this.addChild(name)
+
+    this.sortableChildren = true
   }
 }
